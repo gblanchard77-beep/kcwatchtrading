@@ -3,51 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KC Watch Trading | Luxury Watch Dealer Kansas City | Gray Market Watches</title>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="KC Watch Trading is Kansas City's premier gray market source for luxury timepieces. No waitlists, no authorized dealer games. Direct access to Rolex Sport Models and other high-demand watches in the secondary market.">
-  <meta name="keywords" content="luxury watch dealer Kansas City, gray market watches KC, buy Rolex Kansas City, sell Rolex Kansas City, Rolex Submariner Kansas City, GMT Master Kansas City, Daytona Kansas City, secondary market watches, pre-owned luxury watches Kansas City">
-  <meta name="author" content="KC Watch Trading">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://kcwatchtrading.com/">
-
-  <!-- Open Graph (Facebook/Instagram sharing) -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kcwatchtrading.com/">
-  <meta property="og:title" content="KC Watch Trading — The Art of Timeless Access">
-  <meta property="og:description" content="Kansas City's premier gray market source for luxury timepieces. No waitlists. No authorized dealer games. Pay for the watch, not the wait.">
-  <meta property="og:site_name" content="KC Watch Trading">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KC Watch Trading — The Art of Timeless Access">
-  <meta name="twitter:description" content="Kansas City's premier gray market source for luxury timepieces. No waitlists. No authorized dealer games.">
-
-  <!-- Local Business Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "KC Watch Trading",
-    "description": "Kansas City's premier gray market source for luxury timepieces in the secondary market.",
-    "url": "https://kcwatchtrading.com",
-    "telephone": "+18165350210",
-    "email": "info@kcwatchtrading.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Kansas City",
-      "addressRegion": "MO",
-      "addressCountry": "US"
-    },
-    "areaServed": "Kansas City Metropolitan Area",
-    "priceRange": "$$$",
-    "sameAs": [
-      "https://instagram.com/kcwatchtrading",
-      "https://facebook.com/kcwatchtrading"
-    ]
-  }
-  </script>
+<title>KC Watch Trading — The Art of Timeless Access</title>
+<meta name="description" content="KC Watch Trading is Kansas City's premier gray market source for luxury timepieces. No waitlists, no authorized dealer games. Direct access to the secondary market.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -206,6 +163,56 @@
     .stat-num { font-size: 1.8rem; }
     .contact-heading { font-size: 2rem; }
   }
+
+  .sell {
+    padding: 9rem 7rem;
+    background: #0f3d25;
+    border-top: 0.5px solid rgba(200,169,110,0.1);
+  }
+  .sell-steps {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1px;
+    background: rgba(200,169,110,0.08);
+  }
+  .sell-step {
+    background: rgba(13,51,32,0.8);
+    padding: 3rem 2.5rem;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .sell-step:hover { background: rgba(13,51,32,1); }
+  .sell-step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: rgba(200,169,110,0.12);
+    line-height: 1;
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+  }
+  .sell-step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+  }
+  .sell-step-body {
+    font-size: 0.78rem;
+    line-height: 1.95;
+    color: rgba(245,240,232,0.4);
+    font-weight: 300;
+  }
+  @media (max-width: 768px) {
+    .sell { padding: 4rem 1.8rem; }
+    .sell-steps { grid-template-columns: 1fr; }
+    .sell-step { padding: 2rem 1.8rem; }
+  }
+  @media (max-width: 480px) {
+    .sell { padding: 3.5rem 1.4rem; }
+  }
 </style>
 </head>
 <body>
@@ -215,6 +222,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#models">Models</a></li>
     <li><a href="#process">Process</a></li>
+    <li><a href="#sell">Sell</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Inquire Now</a>
@@ -226,6 +234,7 @@
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#models" onclick="toggleMenu()">Models</a>
   <a href="#process" onclick="toggleMenu()">Process</a>
+  <a href="#sell" onclick="toggleMenu()">Sell</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
   <a href="#contact" onclick="toggleMenu()" style="color:var(--gold);border-top:0.5px solid rgba(200,169,110,0.15);padding-top:1rem;margin-top:0.3rem;">Inquire Now →</a>
 </div>
@@ -342,6 +351,29 @@
   </div>
 </section>
 
+<section class="sell" id="sell">
+  <p class="section-label" style="color:var(--gold);">Looking to Sell?</p>
+  <h2 class="section-heading" style="color:var(--cream);">Turn your watch<br>into <em>cash today.</em></h2>
+  <p style="font-size:0.87rem;line-height:2;color:rgba(245,240,232,0.45);max-width:520px;font-weight:300;margin-bottom:4rem;">We buy luxury timepieces directly — no consignment, no waiting, no games. Same-day offers on most references. If you have a watch you're looking to move, we want to hear from you.</p>
+  <div class="sell-steps">
+    <div class="sell-step">
+      <div class="sell-step-num">01</div>
+      <h3 class="sell-step-title">Tell Us What You Have</h3>
+      <p class="sell-step-body">Fill out the inquiry form with your watch reference, condition, and whether you have box and papers. Photos help but aren't required to get started.</p>
+    </div>
+    <div class="sell-step">
+      <div class="sell-step-num">02</div>
+      <h3 class="sell-step-title">Get a Same-Day Offer</h3>
+      <p class="sell-step-body">We research current secondary market pricing and come back to you fast — typically within a few hours. No lowball games, just a fair market offer.</p>
+    </div>
+    <div class="sell-step">
+      <div class="sell-step-num">03</div>
+      <h3 class="sell-step-title">Get Paid</h3>
+      <p class="sell-step-body">Accept the offer and we handle the rest. Local KC meetup or secure insured shipping. Payment on the spot — cash, wire, or your preferred method.</p>
+    </div>
+  </div>
+  <a href="#contact" class="btn-primary" style="margin-top:3.5rem;display:inline-block;">Get an Offer Today</a>
+</section>
 <section class="contact" id="contact">
   <div>
     <p class="section-label" style="color:var(--gold);">Get in Touch</p>
