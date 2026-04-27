@@ -216,6 +216,148 @@
   @media (max-width: 480px) {
     .sell { padding: 3.5rem 1.4rem; }
   }
+
+  .reviews {
+    padding: 9rem 7rem;
+    background: var(--off-white);
+  }
+  .reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+  .reviews-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .reviews-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--green);
+    line-height: 1;
+  }
+  .reviews-badge-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .review-card {
+    background: #fff;
+    border: 0.5px solid rgba(200,169,110,0.2);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: border-color 0.3s;
+  }
+  .review-card:hover {
+    border-color: rgba(200,169,110,0.5);
+  }
+  .review-stars {
+    display: flex;
+    gap: 3px;
+  }
+  .review-star {
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--text-dark);
+    flex: 1;
+  }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-top: 0.5px solid rgba(200,169,110,0.15);
+    padding-top: 1.2rem;
+  }
+  .review-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gold-light);
+    flex-shrink: 0;
+  }
+  .review-name {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dark);
+  }
+  .review-source {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+  .review-featured {
+    grid-column: span 3;
+    background: var(--green);
+    border-color: rgba(200,169,110,0.15);
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem 3.5rem;
+  }
+  .review-featured .review-text {
+    color: var(--cream);
+    font-size: 1.25rem;
+  }
+  .review-featured .review-author {
+    border-top: none;
+    padding-top: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 120px;
+    border-left: 0.5px solid rgba(200,169,110,0.2);
+    padding-left: 3rem;
+  }
+  .review-featured .review-avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 1.4rem;
+    background: rgba(200,169,110,0.15);
+  }
+  .review-featured .review-name { color: var(--gold-light); }
+  .review-featured .review-source { color: rgba(245,240,232,0.4); }
+  @media (max-width: 768px) {
+    .reviews { padding: 4rem 1.8rem; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .review-featured { grid-column: span 1; flex-direction: column; }
+    .review-featured .review-author { border-left: none; border-top: 0.5px solid rgba(200,169,110,0.2); padding-left: 0; padding-top: 1.2rem; flex-direction: row; text-align: left; }
+    .reviews-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .reviews { padding: 3.5rem 1.4rem; }
+  }
+
 </style>
 </head>
 <body>
@@ -225,6 +367,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#models">Models</a></li>
     <li><a href="#process">Process</a></li>
+    <li><a href="#reviews">Reviews</a></li>
     <li><a href="#sell">Sell</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -237,6 +380,7 @@
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#models" onclick="toggleMenu()">Models</a>
   <a href="#process" onclick="toggleMenu()">Process</a>
+  <a href="#reviews" onclick="toggleMenu()">Reviews</a>
   <a href="#sell" onclick="toggleMenu()">Sell</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
   <a href="#contact" onclick="toggleMenu()" style="color:var(--gold);border-top:0.5px solid rgba(200,169,110,0.15);padding-top:1rem;margin-top:0.3rem;">Inquire Now →</a>
@@ -376,6 +520,108 @@
     </div>
   </div>
   <a href="#contact" class="btn-primary" style="margin-top:3.5rem;display:inline-block;">Get an Offer Today</a>
+</section>
+<section class="reviews" id="reviews">
+  <div class="reviews-header">
+    <div>
+      <p class="section-label">What Our Clients Say</p>
+      <h2 class="section-heading">Trusted by watch<br>collectors across <em>Kansas City.</em></h2>
+    </div>
+    <div class="reviews-badge">
+      <div class="reviews-badge-num">100%</div>
+      <div class="reviews-badge-label">Recommend<br>16 Reviews &bull; Facebook</div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+
+    <!-- Featured review -->
+    <div class="review-card review-featured">
+      <div class="review-text">"Gary was great to work with. He was very patient and made sure to find exactly what I was looking for. He provided good references to make me feel comfortable — there are so many fakes out there in the Rolex market. I will definitely use him again for all purchases. Highly recommend him."</div>
+      <div class="review-author">
+        <div class="review-avatar">C</div>
+        <div>
+          <div class="review-name">Craig</div>
+          <div class="review-source">Facebook &bull; Verified</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review 1 -->
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+      </div>
+      <div class="review-text">"I had a great buying experience with Gary. He found the exact model I was wanting and at a great price. The watch was exactly as described and it was a flawless transaction. It is reassuring to have someone you can trust when you're dealing with high end watches."</div>
+      <div class="review-author">
+        <div class="review-avatar">J</div>
+        <div>
+          <div class="review-name">Jeff</div>
+          <div class="review-source">Facebook &bull; Verified</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review 2 -->
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+      </div>
+      <div class="review-text">"I recently purchased a new Rolex from Gary at KC Watch Trading. This wasn't my first time purchasing one of these incredible timepieces, but it was the first time the experience was truly outstanding from start to finish. Gary was an absolute pleasure to work with."</div>
+      <div class="review-author">
+        <div class="review-avatar">S</div>
+        <div>
+          <div class="review-name">Steve</div>
+          <div class="review-source">Facebook &bull; Verified</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review 3 -->
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+      </div>
+      <div class="review-text">"I had a great experience with Gary and KC Watch Trading. Strong communicator, great follow up, and fair prices."</div>
+      <div class="review-author">
+        <div class="review-avatar">K</div>
+        <div>
+          <div class="review-name">Kevin</div>
+          <div class="review-source">Facebook &bull; Verified</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review 4 -->
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+      </div>
+      <div class="review-text">"I had a great experience buying a watch from Gary and his team. They had proactive communication and made it seamless from start to finish. I'll definitely be working with Gary and his team again!"</div>
+      <div class="review-author">
+        <div class="review-avatar">P</div>
+        <div>
+          <div class="review-name">Pierson</div>
+          <div class="review-source">Facebook &bull; Verified</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review 5 -->
+    <div class="review-card">
+      <div class="review-stars">
+        <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+      </div>
+      <div class="review-text">"Great communication, reputable dealers, and great products. I will continue to do business with KC Watch Trading!"</div>
+      <div class="review-author">
+        <div class="review-avatar">J</div>
+        <div>
+          <div class="review-name">Jesse</div>
+          <div class="review-source">Facebook &bull; Verified</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 <section class="contact" id="contact">
   <div>
