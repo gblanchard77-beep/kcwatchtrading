@@ -12,7 +12,7 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --green: #0d3320; --green-mid: #1a4d30; --green-light: #2a6645;
+    --green: #0d3320; --green-mid: #1a4d30; --green-light: #2a6645;h
     --gold: #c8a96e; --gold-light: #e0c99a; --cream: #f5f0e8;
     --off-white: #faf8f4; --text-dark: #0a1a10; --text-muted: #6b7c6e;
     --border: rgba(200,169,110,0.2);
@@ -717,10 +717,10 @@ async function submitInquiry() {
     fields: {
       name: name,
       last_name: '',
-      phone: isEmail ? '' : contact,
-      company: watch,
-      city: intent,
-      country: message.substring(0, 255)
+      phone_number: isEmail ? '' : contact,
+      watch_reference: watch,
+      inquiry_type: intent,
+      inquiry_message: message.substring(0, 255)
     },
     groups: ['183905202219255711'],
     status: 'active',
