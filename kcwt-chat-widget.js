@@ -9,7 +9,7 @@
     var style = document.createElement('style');
     style.textContent = `
   :root{
-    --bg:#070707; --panel:#0d0d0d; --panel2:#141414;
+    --bg:#070707; --panel:#141414; --panel2:#1c1c1c;
     --gold:#C5B38C; --gold-dim:#8f815f; --green:#02321C;
     --text:#ececec; --muted:#8a8a8a; --line:#242424;
     --serif:'Cormorant Garamond',Georgia,serif; --sans:'Montserrat',system-ui,sans-serif;
@@ -41,10 +41,10 @@
   .cclose{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;padding:2px 6px}
   .cclose:hover{color:var(--gold)}
 
-  .thread{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+  .thread{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;background:#111}
   .thread::-webkit-scrollbar{width:5px}.thread::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:3px}
-  .msg{max-width:80%;padding:11px 14px;font-size:14px;line-height:1.5;border-radius:14px;white-space:pre-wrap}
-  .msg.sam{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .msg{max-width:80%;padding:11px 14px;font-size:14px;line-height:1.5;border-radius:14px;white-space:pre-wrap;color:var(--text)}
+  .msg.sam{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-bottom-left-radius:4px;color:var(--text)}
   .msg.me{align-self:flex-end;background:var(--gold);color:#070707;border-bottom-right-radius:4px;font-weight:500}
   .msg.human{align-self:flex-start;background:#13261c;border:1px solid var(--gold-dim);border-bottom-left-radius:4px}
   .msg.human .tag{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
@@ -58,7 +58,7 @@
   .cfoot input{flex:1;background:var(--panel2);border:1px solid var(--line);color:var(--text);
     font-family:var(--sans);font-size:14px;padding:11px 14px;border-radius:24px;outline:none}
   .cfoot input:focus{border-color:var(--gold)}
-  .cfoot input::placeholder{color:#555}
+  .cfoot input::placeholder{color:#888}
   .send{background:var(--gold);border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;
     flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s}
   .send:hover{opacity:.85}
