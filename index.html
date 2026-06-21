@@ -371,7 +371,7 @@
     <li><a href="#sell">Sell</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Inquire Now</a>
+  <a href="#contact" class="nav-cta" onclick="openKCWTChat();return false;">Inquire Now</a>
   <div class="hamburger" onclick="toggleMenu()" id="hamburger">
     <span></span><span></span><span></span>
   </div>
@@ -383,7 +383,7 @@
   <a href="#reviews" onclick="toggleMenu()">Reviews</a>
   <a href="#sell" onclick="toggleMenu()">Sell</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
-  <a href="#contact" onclick="toggleMenu()" style="color:var(--gold);border-top:0.5px solid rgba(200,169,110,0.15);padding-top:1rem;margin-top:0.3rem;">Inquire Now →</a>
+  <a href="#contact" onclick="toggleMenu();openKCWTChat();return false;" style="color:var(--gold);border-top:0.5px solid rgba(200,169,110,0.15);padding-top:1rem;margin-top:0.3rem;">Inquire Now →</a>
 </div>
 <section class="hero" id="home">
   <div class="hero-left">
@@ -393,7 +393,7 @@
     <p class="hero-slogan">Pay for the watch, not the wait.</p>
     <p class="hero-sub">No waitlists. No authorized dealer games. Direct access to the most liquid timepieces in the secondary market.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Inquire About a Watch</a>
+      <a href="#contact" class="btn-primary" onclick="openKCWTChat();return false;">Inquire About a Watch</a>
       <a href="#models" class="btn-ghost">View Current Models</a>
     </div>
   </div>
@@ -429,7 +429,7 @@
     <div class="divider-line"></div>
     <p class="body-text">KC Watch Trading specializes in sourcing luxury timepieces through the secondary market — built on relationships, not retail.</p>
     <p class="body-text">Through a network of private sellers and trusted dealer relationships, we move quickly on the right pieces. If we don't have it, we know how to get it.</p>
-    <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">Start a Conversation</a>
+    <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-block;" onclick="openKCWTChat();return false;">Start a Conversation</a>
   </div>
   <div class="stats-grid">
     <div class="stat-box"><div class="stat-num">No<br>Waitlist</div><div class="stat-label">No Games</div></div>
@@ -482,7 +482,7 @@
       <p class="model-ref" style="color:rgba(200,169,110,0.55);">Don't see your reference?</p>
       <h3 class="model-name" style="color:var(--gold-light);">Custom Sourcing</h3>
       <p class="model-desc">Tell us exactly what you want — reference, year, condition, box & papers. We'll source it.</p>
-      <a href="#contact" class="btn-primary" style="font-size:0.63rem;padding:0.75rem 1.5rem;display:inline-block;margin-top:0.5rem;">Make a Request</a>
+      <a href="#contact" class="btn-primary" style="font-size:0.63rem;padding:0.75rem 1.5rem;display:inline-block;margin-top:0.5rem;" onclick="openKCWTChat();return false;">Make a Request</a>
     </div>
   </div>
 </section>
@@ -763,5 +763,6 @@ async function submitInquiry() {
   }
 }
 </script>
+<script src="kcwt-chat-widget.js" defer></script>
 </body>
 </html>
