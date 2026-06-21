@@ -78,6 +78,22 @@
   .msg.photo img{display:block;width:150px;max-width:100%;border-radius:9px}
   .msg.photo .cap{font-size:11px;letter-spacing:.5px;color:var(--gold);text-transform:uppercase;
     margin:6px 2px 2px;text-align:center}
+
+  @media (max-width: 768px) {
+    .overlay{padding:12px}
+    .chat{max-width:100%;height:420px;border-radius:12px}
+    .chead{padding:12px 14px}
+    .chead .who b{font-size:15px}
+    .thread{padding:12px;gap:10px}
+    .msg{font-size:13px;padding:9px 12px}
+    .cfoot{padding:10px 12px}
+    .cfoot input{font-size:13px;padding:9px 12px}
+    .launch{bottom:16px;right:16px;font-size:12px;padding:11px 18px}
+  }
+  @media (max-width: 480px) {
+    .chat{height:380px}
+    .overlay{padding:8px}
+  }
 `;
     document.head.appendChild(style);
     // markup
