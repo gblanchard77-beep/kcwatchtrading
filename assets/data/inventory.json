@@ -1,0 +1,138 @@
+{
+  "_readme": "KC WATCH TRADING INVENTORY - the ONLY file to edit for watches. Homepage shows first 3 with status Available. status: Available | Incoming | Reserved | Sold. Sold watches auto-move to Recently Sold. price: number (14700) or \"Inquire\". Unknown fields: \"\" (auto-hidden). Edit on github.com from any device.",
+  "watches": [
+    {
+      "slug": "vacheron-overseas-chronograph-rose-gold-green",
+      "status": "Available",
+      "brand": "Vacheron Constantin",
+      "model": "Overseas Chronograph",
+      "nickname": "",
+      "reference": "5500V",
+      "year": "",
+      "cardDate": "",
+      "condition": "Excellent",
+      "set": "",
+      "price": "Inquire",
+      "caseSize": "42.5mm",
+      "material": "18k Rose Gold",
+      "dial": "Green Sunburst",
+      "bracelet": "18k Rose Gold Integrated",
+      "included": "Inquire for details",
+      "description": "The Overseas Chronograph in 18k 5N pink gold with the green lacquered sunburst dial. Integrated pink gold bracelet with the Maltese cross link design. One of the most requested combinations in the current Vacheron catalog.",
+      "image": "assets/images/vc-overseas-chrono-rg-green.jpg",
+      "cardImage": "assets/images/vc-overseas-chrono-rg-green-card.jpg",
+      "order": 1
+    },
+    {
+      "slug": "rolex-submariner-date-126613lb",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "Submariner Date",
+      "nickname": "Bluesy",
+      "reference": "126613LB",
+      "year": "",
+      "cardDate": "",
+      "condition": "Excellent",
+      "set": "",
+      "price": "Inquire",
+      "caseSize": "41mm",
+      "material": "Oystersteel & Yellow Gold",
+      "dial": "Royal Blue",
+      "bracelet": "Yellow Rolesor Oyster",
+      "included": "Inquire for details",
+      "description": "The Submariner Date in Oystersteel and 18k yellow gold \u2014 the \"Bluesy.\" Royal blue sunburst dial under the blue Cerachrom bezel, 41mm case, yellow Rolesor Oyster bracelet with Glidelock extension.",
+      "image": "assets/images/rolex-submariner-126613lb.jpg",
+      "cardImage": "assets/images/rolex-submariner-126613lb-card.jpg",
+      "order": 2
+    },
+    {
+      "slug": "rolex-gmt-master-ii-126710blnr-jubilee",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "GMT-Master II",
+      "nickname": "Batgirl",
+      "reference": "126710BLNR",
+      "year": "",
+      "cardDate": "",
+      "condition": "Excellent",
+      "set": "",
+      "price": "Inquire",
+      "caseSize": "40mm",
+      "material": "Oystersteel",
+      "dial": "Black",
+      "bracelet": "Jubilee",
+      "included": "Inquire for details",
+      "description": "The GMT-Master II ref. 126710BLNR \u2014 blue and black Cerachrom bezel on the five-link Jubilee bracelet, the configuration collectors call the Batgirl. Independently adjustable 24-hour hand.",
+      "image": "assets/images/rolex-gmt-126710blnr.jpg",
+      "cardImage": "assets/images/rolex-gmt-126710blnr-card.jpg",
+      "order": 3
+    },
+    {
+      "slug": "rolex-submariner-124060",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "Submariner",
+      "nickname": "No-Date",
+      "reference": "124060",
+      "year": "",
+      "cardDate": "",
+      "condition": "Excellent",
+      "set": "",
+      "price": "Inquire",
+      "caseSize": "41mm",
+      "material": "Oystersteel",
+      "dial": "Black",
+      "bracelet": "Oyster",
+      "included": "Inquire for details",
+      "description": "The Submariner ref. 124060 in Oystersteel. Black dial, black Cerachrom bezel, 41mm case, Oyster bracelet with Glidelock. The cleanest expression of the most recognizable dive watch ever made.",
+      "image": "assets/images/rolex-submariner-124060.jpg",
+      "cardImage": "assets/images/rolex-submariner-124060-card.jpg",
+      "order": 4
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Craig",
+      "platform": "Facebook",
+      "stars": 5,
+      "type": "Watch Purchase",
+      "featured": true,
+      "text": "Gary was great to work with. He was very patient and made sure to find exactly what I was looking for. He provided good references to make me feel comfortable \u2014 there are so many fakes out there in the Rolex market. I will definitely use him again for all purchases. Highly recommend him."
+    },
+    {
+      "name": "Jeff",
+      "platform": "Facebook",
+      "stars": 5,
+      "type": "Sourced Watch",
+      "text": "I had a great buying experience with Gary. He found the exact model I was wanting and at a great price. The watch was exactly as described and it was a flawless transaction. It is reassuring to have someone you can trust when you're dealing with high end watches."
+    },
+    {
+      "name": "Steve",
+      "platform": "Facebook",
+      "stars": 5,
+      "type": "Rolex Purchase",
+      "text": "I recently purchased a new Rolex from Gary at KC Watch Trading. This wasn't my first time purchasing one of these incredible timepieces, but it was the first time the experience was truly outstanding from start to finish. Gary was an absolute pleasure to work with."
+    },
+    {
+      "name": "Kevin",
+      "platform": "Facebook",
+      "stars": 5,
+      "type": "",
+      "text": "I had a great experience with Gary and KC Watch Trading. Strong communicator, great follow up, and fair prices."
+    },
+    {
+      "name": "Pierson",
+      "platform": "Facebook",
+      "stars": 5,
+      "type": "",
+      "text": "I had a great experience buying a watch from Gary and his team. They had proactive communication and made it seamless from start to finish. I'll definitely be working with Gary and his team again!"
+    },
+    {
+      "name": "Jesse",
+      "platform": "Facebook",
+      "stars": 5,
+      "type": "",
+      "text": "Great communication, reputable dealers, and great products. I will continue to do business with KC Watch Trading!"
+    }
+  ]
+}

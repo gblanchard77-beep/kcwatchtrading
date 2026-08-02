@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sell or Trade Your Watch — KC Watch Trading | Sell Rolex Kansas City</title>
+<meta name="description" content="Sell your Rolex or luxury watch to KC Watch Trading. Direct purchase, market-based offers, fast payment.">
+<link rel="canonical" href="https://kcwatchtrading.com/sell.html">
+<meta property="og:title" content="Sell or Trade Your Watch — KC Watch Trading | Sell Rolex Kansas City">
+<meta property="og:description" content="Sell your Rolex or luxury watch to KC Watch Trading. Direct purchase, market-based offers, fast payment.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<meta name="theme-color" content="#0D241E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital@1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/v2.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="header-logo" href="index.html"><img src="assets/images/logo-horizontal.png" alt="KC Watch Trading — The Art of Timeless Access"></a>
+    <nav aria-label="Main"><ul class="main-nav">
+      <li><a href="shop.html">Available</a></li>
+      <li><a href="sell.html" aria-current="page">Sell</a></li>
+      <li><a href="source.html">Source</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></nav>
+    <a class="header-cta desktop-only" href="sell.html">Sell Your Watch</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="nav-scrim" id="navScrim"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+  <a href="shop.html">Available</a><a href="sell.html">Sell</a><a href="source.html">Source a Watch</a>
+  <a href="about.html">About</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
+  <a class="header-cta" href="sell.html">Sell Your Watch</a>
+</nav>
+<main>
+
+<section class="page-hero"><div class="wrap"><h1>Turn Your Watch Into Cash</h1>
+<p>We buy luxury watches directly — no consignment, no marketplace waiting. Tell us what you have and we'll come back with a straight, market-based offer.</p></div></section>
+<section class="section"><div class="wrap"><div class="contact-grid">
+  <div>
+    <h2 class="sec-title" style="font-size:1.6rem;">How it works</h2>
+    <ol class="process-steps">
+      <li><strong>Submit the watch.</strong> Reference, condition, box and papers — two minutes.</li>
+      <li><strong>Receive a market-based offer.</strong> Priced against current secondary-market data.</li>
+      <li><strong>Verify and complete.</strong> Local Kansas City transaction at our office, or insured shipping with verification on arrival.</li>
+      <li><strong>Get paid.</strong> Wire or your preferred method — payment moves as soon as the watch is verified.</li>
+    </ol>
+    <p class="form-note"><strong>Photos:</strong> after submitting, text photos of the watch, card, and box to <a href="sms:8165350210" style="color:var(--forest);font-weight:600;">(816) 535-0210</a> — it speeds up your offer significantly.</p>
+    <p class="form-note">Trading toward another piece? Mention the reference you want in the notes and we'll structure it as a trade.</p>
+  </div>
+  <div class="form-shell">
+    <div class="field hp-field" aria-hidden="true"><label>Leave blank</label><input type="text" id="hpField" tabindex="-1" autocomplete="off"></div>
+    <div class="form-grid">
+      <div class="field"><label for="fieldName">Name <span class="req">*</span></label><input id="fieldName" type="text" required></div>
+      <div class="field"><label for="fieldContact">Phone or Email <span class="req">*</span></label><input id="fieldContact" type="text" required></div>
+      <div class="field"><label for="sBrand">Brand</label><input id="sBrand" type="text" placeholder="Rolex, AP, Omega..."></div>
+      <div class="field"><label for="sModel">Model</label><input id="sModel" type="text" placeholder="Submariner Date"></div>
+      <div class="field"><label for="sReference">Reference</label><input id="sReference" type="text" placeholder="126610LN"></div>
+      <div class="field"><label for="sYear">Year</label><input id="sYear" type="text" placeholder="2023"></div>
+      <div class="field"><label for="sCondition">Condition</label><select id="sCondition"><option value="">Select...</option><option>Unworn</option><option>Excellent</option><option>Very Good</option><option>Good</option><option>Fair</option></select></div>
+      <div class="field"><label for="sLinks">Number of Links</label><input id="sLinks" type="text" placeholder="Full links / short 2"></div>
+      <div class="field"><label for="sBox">Box Included</label><select id="sBox"><option value="">Select...</option><option>Yes</option><option>No</option></select></div>
+      <div class="field"><label for="sPapers">Papers / Card Included</label><select id="sPapers"><option value="">Select...</option><option>Yes</option><option>No</option></select></div>
+      <div class="field"><label for="sService">Service History</label><input id="sService" type="text" placeholder="If known"></div>
+      <div class="field"><label for="sPrice">Desired Price</label><input id="sPrice" type="text" placeholder="$"></div>
+      <div class="field"><label for="sCity">City</label><input id="sCity" type="text"></div>
+      <div class="field"><label for="sState">State</label><input id="sState" type="text"></div>
+      <div class="field full"><label for="sNotes">Additional Information</label><textarea id="sNotes"></textarea></div>
+    </div>
+    <button class="btn btn-gold" style="width:100%;" id="submitBtn" type="button" onclick="submitSell()">Submit for an Offer &rarr;</button>
+    <p class="form-msg" id="formMsg"></p>
+  </div>
+</div></div></section></main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-seal"><img src="assets/images/logo-seal.png" alt="KC Watch Trading seal" loading="lazy"></div>
+    <div><span class="footer-tag">The Art of Timeless Access</span>
+      <div class="footer-contact">
+        <a href="tel:8165350210">(816) 535-0210</a>
+        <a href="mailto:info@kcwatchtrading.com">info@kcwatchtrading.com</a>
+        <a href="https://instagram.com/kcwatchtrading" target="_blank" rel="noopener">@KCWatchTrading</a>
+        <a href="https://facebook.com/kcwatchtrading" target="_blank" rel="noopener">Facebook</a>
+      </div></div>
+    <ul class="footer-nav">
+      <li><a href="shop.html">Available</a></li><li><a href="recently-sold.html">Recently Sold</a></li>
+      <li><a href="sell.html">Sell</a></li><li><a href="source.html">Source</a></li>
+      <li><a href="about.html">About</a></li><li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li><li><a href="disclaimer.html">Disclaimer</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal"><p>KC Watch Trading is a DBA of La Catrina Marketing LLC. KC Watch Trading is an independent secondary market dealer and is not affiliated with, authorized by, or endorsed by Rolex SA or any other watch manufacturer or brand referenced on this site. All brand names, model names, and trademarks are the property of their respective owners and are used for identification purposes only. &copy; 2026 La Catrina Marketing LLC. All rights reserved.</p></div>
+</footer>
+<script src="assets/js/site-v2.js"></script>
+<script src="kcwt-chat-widget.js" defer></script>
+</body>
+</html>

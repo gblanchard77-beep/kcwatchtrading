@@ -1,0 +1,35 @@
+name: Instagram feed refresh
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch:          # manual "Run workflow" button
+permissions:
+  contents: write
+concurrency:
+  group: ig-refresh
+  cancel-in-progress: true
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Fetch latest posts
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: node scripts/fetch-instagram.mjs
+        # Any failure stops here -> no commit -> site keeps last successful feed
+      - name: Commit if changed
+        run: |
+          git config user.name "kcwt-feed-bot"
+          git config user.email "feed-bot@kcwatchtrading.com"
+          git add assets/data/instagram.json assets/images/ig/
+          if git diff --cached --quiet; then
+            echo "No feed changes."
+          else
+            git commit -m "Instagram feed refresh"
+            git push
+          fi

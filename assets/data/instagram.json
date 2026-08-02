@@ -1,0 +1,51 @@
+{
+  "_readme": "Design-review tiles rendered in the locked KCWT post templates. The live feed job overwrites this file with actual Instagram posts after integration approval.",
+  "updated": "MOCKUP",
+  "posts": [
+    {
+      "image": "assets/images/ig/ig1.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    },
+    {
+      "image": "assets/images/ig/ig2.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    },
+    {
+      "image": "assets/images/ig/ig3.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    },
+    {
+      "image": "assets/images/ig/ig4.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    },
+    {
+      "image": "assets/images/ig/ig5.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    },
+    {
+      "image": "assets/images/ig/ig6.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    },
+    {
+      "image": "assets/images/ig/ig7.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    },
+    {
+      "image": "assets/images/ig/ig8.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    },
+    {
+      "image": "assets/images/ig/ig9.jpg",
+      "permalink": "https://instagram.com/kcwatchtrading",
+      "alt": "KC Watch Trading post"
+    }
+  ]
+}

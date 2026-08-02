@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch Details — KC Watch Trading</title>
+<meta name="description" content="Luxury watch details, full specifications, and inquiry — KC Watch Trading.">
+<link rel="canonical" href="https://kcwatchtrading.com/watch.html">
+<meta property="og:title" content="Watch Details — KC Watch Trading">
+<meta property="og:description" content="Luxury watch details, full specifications, and inquiry — KC Watch Trading.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<meta name="theme-color" content="#0D241E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital@1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/v2.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="header-logo" href="index.html"><img src="assets/images/logo-horizontal.png" alt="KC Watch Trading — The Art of Timeless Access"></a>
+    <nav aria-label="Main"><ul class="main-nav">
+      <li><a href="shop.html">Available</a></li>
+      <li><a href="sell.html">Sell</a></li>
+      <li><a href="source.html">Source</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></nav>
+    <a class="header-cta desktop-only" href="sell.html">Sell Your Watch</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="nav-scrim" id="navScrim"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+  <a href="shop.html">Available</a><a href="sell.html">Sell</a><a href="source.html">Source a Watch</a>
+  <a href="about.html">About</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
+  <a class="header-cta" href="sell.html">Sell Your Watch</a>
+</nav>
+<main>
+
+<section class="section" id="watchDetail"><div class="wrap">
+  <div class="detail-grid">
+    <div class="detail-photo"><img id="dImg" src="" alt=""></div>
+    <div>
+      <p class="detail-brand" id="dBrand"></p>
+      <h1 class="detail-title" id="dTitle"></h1>
+      <p class="detail-nick" id="dNick"></p>
+      <span class="a-status" id="dStatus" style="position:static;display:inline-block;"></span>
+      <p class="detail-price" id="dPrice"></p>
+      <table class="spec-table">
+        <tr><th>Reference</th><td id="dRef"></td></tr>
+        <tr><th>Year</th><td id="dYear"></td></tr>
+        <tr><th>Card Date</th><td id="dCard"></td></tr>
+        <tr><th>Condition</th><td id="dCondition"></td></tr>
+        <tr><th>Set</th><td id="dSet"></td></tr>
+        <tr><th>Case Size</th><td id="dCase"></td></tr>
+        <tr><th>Material</th><td id="dMaterial"></td></tr>
+        <tr><th>Dial</th><td id="dDial"></td></tr>
+        <tr><th>Bracelet</th><td id="dBracelet"></td></tr>
+        <tr><th>Included</th><td id="dIncluded"></td></tr>
+      </table>
+      <p class="detail-desc" id="dDesc"></p>
+      <div class="detail-note"><strong>Payment &amp; shipping.</strong> Wire transfer prior to shipment unless prior business. Fully insured, signature-required shipping nationwide, or local transaction in the Kansas City area. References available. KC Watch Trading is an independent secondary-market dealer, not an authorized dealer.</div>
+      <div class="form-shell" style="padding:2.2rem 2rem;">
+        <h2 style="font-size:1.05rem;font-weight:600;color:var(--forest);margin-bottom:1.4rem;">Inquire About This Watch</h2>
+        <div class="field hp-field" aria-hidden="true"><label>Leave blank</label><input type="text" id="hpField" tabindex="-1" autocomplete="off"></div>
+        <div class="form-grid">
+          <div class="field"><label for="fieldName">Name <span class="req">*</span></label><input id="fieldName" type="text" required></div>
+          <div class="field"><label for="fieldContact">Phone or Email <span class="req">*</span></label><input id="fieldContact" type="text" required></div>
+          <div class="field full"><label for="fieldWatch">Watch</label><input id="fieldWatch" type="text" readonly style="background:var(--ivory);"></div>
+          <input type="hidden" id="fieldIntent" value="Buy a specific watch">
+          <div class="field full"><label for="fieldMessage">Message</label><textarea id="fieldMessage" placeholder="Questions, timeline, offer..."></textarea></div>
+        </div>
+        <button class="btn btn-gold" style="width:100%;" id="submitBtn" type="button" onclick="submitInquiry()">Send Inquiry &rarr;</button>
+        <p class="form-msg" id="formMsg"></p>
+      </div>
+      <p style="margin-top:1.3rem;font-size:.95rem;color:var(--muted);">Prefer to talk? Call or text <a href="tel:8165350210" style="color:var(--forest);font-weight:600;">(816) 535-0210</a> · DM <a href="https://instagram.com/kcwatchtrading" target="_blank" rel="noopener" style="color:var(--forest);font-weight:600;">@KCWatchTrading</a></p>
+    </div>
+  </div>
+  <div style="margin-top:4rem;">
+    <h2 class="sec-title" style="font-size:1.6rem;margin-bottom:1.6rem;">You May Also Like</h2>
+    <div class="card-grid" id="relatedGrid"></div>
+  </div>
+</div></section></main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-seal"><img src="assets/images/logo-seal.png" alt="KC Watch Trading seal" loading="lazy"></div>
+    <div><span class="footer-tag">The Art of Timeless Access</span>
+      <div class="footer-contact">
+        <a href="tel:8165350210">(816) 535-0210</a>
+        <a href="mailto:info@kcwatchtrading.com">info@kcwatchtrading.com</a>
+        <a href="https://instagram.com/kcwatchtrading" target="_blank" rel="noopener">@KCWatchTrading</a>
+        <a href="https://facebook.com/kcwatchtrading" target="_blank" rel="noopener">Facebook</a>
+      </div></div>
+    <ul class="footer-nav">
+      <li><a href="shop.html">Available</a></li><li><a href="recently-sold.html">Recently Sold</a></li>
+      <li><a href="sell.html">Sell</a></li><li><a href="source.html">Source</a></li>
+      <li><a href="about.html">About</a></li><li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li><li><a href="disclaimer.html">Disclaimer</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal"><p>KC Watch Trading is a DBA of La Catrina Marketing LLC. KC Watch Trading is an independent secondary market dealer and is not affiliated with, authorized by, or endorsed by Rolex SA or any other watch manufacturer or brand referenced on this site. All brand names, model names, and trademarks are the property of their respective owners and are used for identification purposes only. &copy; 2026 La Catrina Marketing LLC. All rights reserved.</p></div>
+</footer>
+<script src="assets/js/site-v2.js"></script>
+<script src="kcwt-chat-widget.js" defer></script>
+</body>
+</html>
