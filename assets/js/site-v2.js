@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function(){
         });
         document.getElementById('dDesc').textContent=w.description||'';
         var wf=document.getElementById('fieldWatch'); if(wf)wf.value=(w.brand+' '+w.model+' '+(w.reference||'')).trim();
+        if(window.fbq)fbq('track','ViewContent',{content_type:'product',content_name:(w.brand+' '+w.model+' '+(w.reference||'')).trim(),content_category:w.brand});
         var rel=inv.filter(function(x){return x.slug!==w.slug&&x.status!=='Sold'}).slice(0,3);
         var rg=document.getElementById('relatedGrid'); if(rg)rg.innerHTML=rel.map(function(x){return cardHTML(x)}).join('');
       }
@@ -143,6 +144,7 @@ async function submitLeadForm(o){
   try{
     var r=await fetch('https://connect.mailerlite.com/api/subscribers',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ML_TOKEN},body:JSON.stringify(payload)});
     if(r.status===200||r.status===201){
+      if(window.fbq)fbq('track','Lead',{content_category:o.intent||'inquiry',content_name:(o.watchInfo||'').substring(0,90)});
       msg.style.display='block';msg.style.color='#7a6434';msg.textContent=o.successMsg||'Inquiry received. We will be in touch within 24 hours.';
       btn.textContent='Sent \u2713';(o.clearIds||[]).forEach(function(id){var el=document.getElementById(id);if(el)el.value=''});
     }else{throw new Error('bad')}
@@ -164,3 +166,9 @@ function submitSource(){
   var det=[val('qYear')&&'Year: '+val('qYear'),val('qCondition')&&'Cond: '+val('qCondition'),val('qSet')&&'Set: '+val('qSet'),val('qBudget')&&'Budget: '+val('qBudget'),val('qTiming')&&'Timing: '+val('qTiming'),val('qNotes')].filter(Boolean).join(' | ');
   submitLeadForm({watchInfo:'SOURCE: '+wi,intent:'Source a watch for me',message:det,successMsg:'Request received. We will check the network and come back with what we can do.',clearIds:['fieldName','fieldContact','qBrand','qModel','qReference','qYear','qCondition','qSet','qBudget','qTiming','qNotes']});
 }
+
+/* Contact-intent tracking: phone/text/email taps */
+document.addEventListener('click', function(e){
+  var a = e.target.closest && e.target.closest('a[href^="tel:"],a[href^="sms:"],a[href^="mailto:"]');
+  if(a && window.fbq) fbq('track','Contact');
+}, true);
