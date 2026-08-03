@@ -1,50 +1,49 @@
 {
-  "_readme": "Design-review tiles rendered in the locked KCWT post templates. The live feed job overwrites this file with actual Instagram posts after integration approval.",
-  "updated": "MOCKUP",
+  "updated": "2026-08-03T12:36:11.617Z",
   "posts": [
     {
-      "image": "assets/images/ig/ig1.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
-      "alt": "KC Watch Trading post"
+      "image": "assets/images/ig/live1.jpg",
+      "permalink": "https://www.instagram.com/p/Dbi2MvpCYXv/",
+      "alt": "Consignment."
     },
     {
-      "image": "assets/images/ig/ig2.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
-      "alt": "KC Watch Trading post"
+      "image": "assets/images/ig/live2.jpg",
+      "permalink": "https://www.instagram.com/p/DbgRZYKicHE/",
+      "alt": "The Datejust."
     },
     {
-      "image": "assets/images/ig/ig3.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
-      "alt": "KC Watch Trading post"
+      "image": "assets/images/ig/live3.jpg",
+      "permalink": "https://www.instagram.com/p/Dbe_AcyjTba/",
+      "alt": "The Grey Math."
     },
     {
-      "image": "assets/images/ig/ig4.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
-      "alt": "KC Watch Trading post"
+      "image": "assets/images/ig/live4.jpg",
+      "permalink": "https://www.instagram.com/p/Dbb-vodCMrd/",
+      "alt": "SOLD. Sourced and sold."
     },
     {
-      "image": "assets/images/ig/ig5.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
-      "alt": "KC Watch Trading post"
+      "image": "assets/images/ig/live5.jpg",
+      "permalink": "https://www.instagram.com/p/DbbH0FJjyau/",
+      "alt": "The Clasp."
     },
     {
-      "image": "assets/images/ig/ig6.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
-      "alt": "KC Watch Trading post"
+      "image": "assets/images/ig/live6.jpg",
+      "permalink": "https://www.instagram.com/p/DbYjA_fFKHA/",
+      "alt": "Tudor's Revival."
     },
     {
-      "image": "assets/images/ig/ig7.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
-      "alt": "KC Watch Trading post"
+      "image": "assets/images/ig/live7.jpg",
+      "permalink": "https://www.instagram.com/p/DbV-OSPDZwm/",
+      "alt": "The Hype Tax."
     },
     {
-      "image": "assets/images/ig/ig8.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
-      "alt": "KC Watch Trading post"
+      "image": "assets/images/ig/live8.jpg",
+      "permalink": "https://www.instagram.com/p/DbTZbcfEmq6/",
+      "alt": "COSC vs METAS."
     },
     {
-      "image": "assets/images/ig/ig9.jpg",
-      "permalink": "https://instagram.com/kcwatchtrading",
+      "image": "assets/images/ig/live9.jpg",
+      "permalink": "https://www.instagram.com/p/DbS99hCiDZl/",
       "alt": "KC Watch Trading post"
     }
   ]
