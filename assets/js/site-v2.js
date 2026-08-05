@@ -131,6 +131,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
 /* ---- forms: MailerLite (existing wiring; do not change group) ---- */
 var ML_TOKEN='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiN2YzOTNkODNmNDg1NmVmZDc0MTI2MWZjNGM1OGUxMzU4YTk2MDkyMGUxY2FjYTJhNjhkYjhkY2IzNmRjMjg1Y2FiNDZiMzZiYzAwMzlhNGIiLCJpYXQiOjE3NzUzODYwNzguODEzMzc4LCJuYmYiOjE3NzUzODYwNzguODEzMzgxLCJleHAiOjQ5MzEwNTk2NzguODA3OTg5LCJzdWIiOiIyMjQ5MDAwIiwic2NvcGVzIjpbXX0.DWqVLWRZJPVt_nRDDuoqmwHz4-QOrTF8Fybdn4N-zEDir8HJclM25_OOaY21C3S_gXoo2B_1E403767WiHO3Y04zZhpzgOtt97BJhQFRGUfdkJWY_2tzrb2Vw4Dqa8zu5xvb0KvEf-stuu87vay4tQJiYW7PugpM5N-Rvx5Tv0NjQzWF_ufxyXANqLIgsb3-IJWUYZIRrg4iiYDaj1uETi5y4xTPcRF-Vi1FP6zSj0goj_10Rpifmq1S8Q8jJsGUIorkNzZESHFEvGgknTDkC5kORQwm-zDqspWwD58GnN2AKM3G4AnknnMVTq8oRWIJmQ3dCayGyjOcjXV1L6HbnxFsCXXoN0MM9pTF5JHe2gA4MWL6UbhKyaqYhiwoXrU0yT8hQCaD6LY5KspWjqpBDYlQtympRuQTcIqzBrUzWkUj_Y1wBUmf8GPZgaTIDysmNzhtNk_NcQU7joIxPLoyg_yK3U68g2Ov2qb_Jg3TlG8cH5CVFMqLm9zFwWpiNC6VsXBGRmLguToNJPBFyvoESZYLBBLmeB7qf0l0s3McfLXXKi9BvH1tiH7_0SimV7VDKPlvTp_XCxZgdDqsxVxLtGrXDR382OgbP5pcFfxYy3H3aFQlPd3Kmr82DySCbc6peOVYloQJDFti7OYrudex4aQ3SrAvjv_oYL1t6qjD3RY';
+
+/* ---- Telegram lead relay (parallel to MailerLite) ---- */
+var LEAD_EP = null;
+var LEAD_EP_P = fetch('lead-endpoint.txt').then(function(r){return r.ok?r.text():''}).then(function(t){
+  t=(t||'').trim(); if(t && t.indexOf('http')===0) LEAD_EP=t.replace(/\/$/,''); return LEAD_EP;
+}).catch(function(){return null});
+function relayLead(payload){
+  return LEAD_EP_P.then(function(){
+    if(!LEAD_EP) return;
+    return fetch(LEAD_EP+'/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  }).catch(function(){/* never block UX on relay */});
+}
+
 function val(id){var el=document.getElementById(id);return el?el.value.trim():''}
 async function submitLeadForm(o){
   var btn=document.getElementById(o.btnId||'submitBtn'),msg=document.getElementById(o.msgId||'formMsg'),hp=document.getElementById('hpField');
@@ -144,11 +157,13 @@ async function submitLeadForm(o){
   try{
     var r=await fetch('https://connect.mailerlite.com/api/subscribers',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ML_TOKEN},body:JSON.stringify(payload)});
     if(r.status===200||r.status===201){
+      relayLead({name:name,contact:contact,watch:o.watchInfo||'',intent:o.intent||'',message:o.message||'',page:location.pathname+location.search,mailerlite:true});
       if(window.fbq)fbq('track','Lead',{content_category:o.intent||'inquiry',content_name:(o.watchInfo||'').substring(0,90)});
       msg.style.display='block';msg.style.color='#7a6434';msg.textContent=o.successMsg||'Inquiry received. We will be in touch within 24 hours.';
       btn.textContent='Sent \u2713';(o.clearIds||[]).forEach(function(id){var el=document.getElementById(id);if(el)el.value=''});
     }else{throw new Error('bad')}
   }catch(e){
+    relayLead({name:name,contact:contact,watch:o.watchInfo||'',intent:o.intent||'',message:o.message||'',page:location.pathname+location.search,mailerlite:false});
     msg.style.display='block';msg.style.color='#8a3b3b';msg.textContent='Something went wrong. Please call or text (816) 535-0210.';
     btn.textContent=o.btnLabel||'Send Inquiry \u2192';btn.disabled=false;
   }
