@@ -40,7 +40,7 @@
       "dial": "Royal Blue",
       "bracelet": "Yellow Rolesor Oyster",
       "included": "Inquire for details",
-      "description": "The Submariner Date in Oystersteel and 18k yellow gold \u2014 the \"Bluesy.\" Royal blue sunburst dial under the blue Cerachrom bezel, 41mm case, yellow Rolesor Oyster bracelet with Glidelock extension.",
+      "description": "The Submariner Date in Oystersteel and 18k yellow gold — the \"Bluesy.\" Royal blue sunburst dial under the blue Cerachrom bezel, 41mm case, yellow Rolesor Oyster bracelet with Glidelock extension.",
       "image": "assets/images/rolex-submariner-126613lb.jpg",
       "cardImage": "assets/images/rolex-submariner-126613lb-card.jpg",
       "order": 2
@@ -62,7 +62,7 @@
       "dial": "Black",
       "bracelet": "Jubilee",
       "included": "Inquire for details",
-      "description": "The GMT-Master II ref. 126710BLNR \u2014 blue and black Cerachrom bezel on the five-link Jubilee bracelet, the configuration collectors call the Batgirl. Independently adjustable 24-hour hand.",
+      "description": "The GMT-Master II ref. 126710BLNR — blue and black Cerachrom bezel on the five-link Jubilee bracelet, the configuration collectors call the Batgirl. Independently adjustable 24-hour hand.",
       "image": "assets/images/rolex-gmt-126710blnr.jpg",
       "cardImage": "assets/images/rolex-gmt-126710blnr-card.jpg",
       "order": 3
@@ -106,7 +106,7 @@
       "dial": "Black",
       "bracelet": "Five-Link",
       "included": "Full set",
-      "description": "The Black Bay 58 Master Chronometer on the five-link bracelet. Black domed dial with gilt accents, black bezel, 39mm case \u2014 the modern vintage-diver formula done right. Sold through KC Watch Trading.",
+      "description": "The Black Bay 58 Master Chronometer on the five-link bracelet. Black domed dial with gilt accents, black bezel, 39mm case — the modern vintage-diver formula done right. Sold through KC Watch Trading.",
       "image": "assets/images/tudor-bb58-7939a1a0nu.jpg",
       "cardImage": "assets/images/tudor-bb58-7939a1a0nu-card.jpg",
       "order": 5
@@ -154,6 +154,28 @@
       "image": "assets/images/rolex-submariner-126610ln.jpg",
       "cardImage": "assets/images/rolex-submariner-126610ln-card.jpg",
       "order": 7
+    },
+    {
+      "slug": "rolex-datejust-41-126331",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "Datejust 41",
+      "nickname": "",
+      "reference": "126331",
+      "year": "2025",
+      "cardDate": "",
+      "condition": "Pre-Owned",
+      "set": "Complete Set",
+      "price": 18000,
+      "caseSize": "",
+      "material": "",
+      "dial": "",
+      "bracelet": "",
+      "included": "Full set",
+      "description": "Rolex Datejust 41 ref. 126331. Contact us for full details and photos.",
+      "image": "assets/images/rolex-datejust-41-126331.jpg",
+      "cardImage": "assets/images/rolex-datejust-41-126331-card.jpg",
+      "order": 8
     }
   ],
   "reviews": [
@@ -163,7 +185,7 @@
       "stars": 5,
       "type": "Watch Purchase",
       "featured": true,
-      "text": "Gary was great to work with. He was very patient and made sure to find exactly what I was looking for. He provided good references to make me feel comfortable \u2014 there are so many fakes out there in the Rolex market. I will definitely use him again for all purchases. Highly recommend him."
+      "text": "Gary was great to work with. He was very patient and made sure to find exactly what I was looking for. He provided good references to make me feel comfortable — there are so many fakes out there in the Rolex market. I will definitely use him again for all purchases. Highly recommend him."
     },
     {
       "name": "Jeff",
