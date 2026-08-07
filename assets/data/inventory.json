@@ -198,6 +198,28 @@
       "image": "assets/images/tudor-black-bay-chrono-79360n.jpg",
       "cardImage": "assets/images/tudor-black-bay-chrono-79360n-card.jpg",
       "order": 9
+    },
+    {
+      "slug": "rolex-airking-126900",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "Airking",
+      "nickname": "",
+      "reference": "126900",
+      "year": "2025",
+      "cardDate": "",
+      "condition": "Pre-Owned",
+      "set": "Complete Set",
+      "price": 8700,
+      "caseSize": "",
+      "material": "",
+      "dial": "",
+      "bracelet": "",
+      "included": "Full set",
+      "description": "Rolex Airking ref. 126900. Contact us for full details and photos.",
+      "image": "assets/images/rolex-airking-126900.jpg",
+      "cardImage": "assets/images/rolex-airking-126900-card.jpg",
+      "order": 10
     }
   ],
   "reviews": [
