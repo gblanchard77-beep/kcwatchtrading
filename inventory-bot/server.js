@@ -61,6 +61,10 @@ const MODELS = { 'SUB DATE': 'Submariner Date', 'SUB ND': 'Submariner', 'SUB': '
   'GMT': 'GMT-Master II', 'DAYT': 'Daytona', 'DAYTONA': 'Daytona', 'EXP II': 'Explorer II', 'EXP': 'Explorer',
   'SD': 'Sea-Dweller', 'DSSD': 'Deepsea', 'YM': 'Yacht-Master', 'SKY': 'Sky-Dweller', 'AIR KING': 'Air-King',
   'DJ41': 'Datejust 41', 'DJ36': 'Datejust 36', 'DJ': 'Datejust', 'OP': 'Oyster Perpetual',
+  'AIRKING': 'Air-King', 'AIR-KING': 'Air-King', 'GMT MASTER II': 'GMT-Master II', 'GMT-MASTER II': 'GMT-Master II',
+  'GMT MASTER': 'GMT-Master II', 'SUBMARINER DATE': 'Submariner Date', 'SUBMARINER': 'Submariner', 'DATEJUST': 'Datejust',
+  'BLACK BAY 58': 'Black Bay 58', 'BLACK BAY 54': 'Black Bay 54', 'BLACK BAY CHRONO': 'Black Bay Chrono',
+  'BLACK BAY GMT': 'Black Bay GMT', 'BLACK BAY': 'Black Bay', 'OVERSEAS': 'Overseas', 'SPEEDMASTER': 'Speedmaster', 'SEAMASTER': 'Seamaster',
   'BB58': 'Black Bay 58', 'BB54': 'Black Bay 54', 'BB CHRONO': 'Black Bay Chrono', 'BB GMT': 'Black Bay GMT' };
 const NICKS = { BATMAN: 'Batman', BATGIRL: 'Batgirl', PEPSI: 'Pepsi', SPRITE: 'Sprite', BLUESY: 'Bluesy',
   'ROOT BEER': 'Root Beer', ROOTBEER: 'Root Beer', KERMIT: 'Kermit', STARBUCKS: 'Starbucks', HULK: 'Hulk',
@@ -99,7 +103,8 @@ function parseSpec(text) {
     if (/\d/.test(words[i]) && words[i].length >= 4) { out.reference = words.splice(i, 1)[0]; break; }
   }
   const modelRaw = words.join(' ');
-  out.model = MODELS[modelRaw] || (modelRaw ? modelRaw.split(' ').map(w => w.length > 3 ? w[0] + w.slice(1).toLowerCase() : w).join(' ') : '');
+  const ACRO = ['GMT','II','ND','OP','SD','VC','AP','BB'];
+  out.model = MODELS[modelRaw] || (modelRaw ? modelRaw.split(' ').map(w => (/^[A-Z]+$/.test(w) && !ACRO.includes(w) && !/\d/.test(w)) ? w[0] + w.slice(1).toLowerCase() : (w.length > 3 && !/\d/.test(w) ? w[0] + w.slice(1).toLowerCase() : w)).join(' ') : '');
   if (!out.brand && out.model) out.brand = 'Rolex'; // Gary's default sourcing brand
   return out;
 }
