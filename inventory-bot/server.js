@@ -68,7 +68,9 @@ const NICKS = { BATMAN: 'Batman', BATGIRL: 'Batgirl', PEPSI: 'Pepsi', SPRITE: 'S
 
 function parseSpec(text) {
   let s = ' ' + text.toUpperCase().replace(/[,]/g, '').replace(/\s+/g, ' ').trim() + ' ';
-  const out = { status: 'Available', condition: '', set: '', price: 'Inquire', year: '', nickname: '' };
+  const out = { status: 'Available', condition: '', set: '', price: 'Inquire', year: '', nickname: '', stockId: '' };
+  const sid = s.match(/#([A-Z0-9]{3,14})/);
+  if (sid) { out.stockId = sid[1]; s = s.replace(sid[0], ' '); }
 
   const price = s.match(/\$\s?([\d]+)/) || s.match(/ (\d{4,6})(?=\s*$)/);
   if (price) { out.price = parseInt(price[1], 10); s = s.replace(price[0], ' '); }
@@ -108,7 +110,7 @@ function slugify(e) {
 function preview(e) {
   return ['PREVIEW — reply YES to publish, NO to cancel', '',
     `Brand: ${e.brand}`, `Model: ${e.model}`, e.nickname ? `Nickname: ${e.nickname}` : null,
-    `Reference: ${e.reference}`, `Year: ${e.year || '(blank)'}`, `Condition: ${e.condition || '(blank)'}`,
+    `Reference: ${e.reference}`, e.stockId ? `Stock ID: ${e.stockId}` : 'Stock ID: (none — add #ID to caption to set)', `Year: ${e.year || '(blank)'}`, `Condition: ${e.condition || '(blank)'}`,
     `Set: ${e.set || '(blank)'}`, `Price: ${typeof e.price === 'number' ? '$' + e.price.toLocaleString() : e.price}`,
     `Status: ${e.status}`].filter(Boolean).join('\n');
 }
@@ -131,16 +133,19 @@ async function publishAdd(chatId) {
   const full = await base.clone().resize({ width: Math.min(1400, cw) }).jpeg({ quality: 82, progressive: true }).toBuffer();
   const card = await base.clone().resize({ width: Math.min(720, cw) }).jpeg({ quality: 80, progressive: true }).toBuffer();
 
-  const slug = slugify(e);
+  const { data: invCheck } = await getInventory();
+  let slug = slugify(e), n = 1;
+  while (invCheck.watches.some(w => w.slug === slug)) { n++; slug = slugify(e) + '-' + n; }
   const imgPath = `assets/images/${slug}.jpg`, cardPath = `assets/images/${slug}-card.jpg`;
   await putFile(imgPath, full.toString('base64'), `Add photo: ${e.reference}`);
   await putFile(cardPath, card.toString('base64'), `Add card photo: ${e.reference}`);
 
   const { data, sha } = await getInventory();
   const maxOrder = Math.max(0, ...data.watches.map(x => x.order || 0));
+  while (data.watches.some(w => w.slug === slug)) { n++; slug = slugify(e) + '-' + n; }
   data.watches.push({
     slug, status: e.status, brand: e.brand, model: e.model, nickname: e.nickname || '',
-    reference: e.reference, year: e.year || '', cardDate: '', condition: e.condition || '',
+    reference: e.reference, stockId: e.stockId || '', year: e.year || '', cardDate: '', condition: e.condition || '',
     set: e.set || '', price: e.price, caseSize: '', material: '', dial: '', bracelet: '',
     included: e.set === 'Complete Set' ? 'Full set' : 'Inquire for details',
     description: `${e.brand} ${e.model}${e.nickname ? ' \u201C' + e.nickname + '\u201D' : ''} ref. ${e.reference}. Contact us for full details and photos.`,
@@ -150,13 +155,29 @@ async function publishAdd(chatId) {
   await send(chatId, `\u2705 ${e.brand} ${e.model} ${e.reference} published as ${e.status}. Live in ~2 min.`);
 }
 
-async function updateWatch(chatId, ref, fn, label) {
+async function updateWatch(chatId, ref, fn, label, idx) {
   const { data, sha } = await getInventory();
-  const w = data.watches.find(x => (x.reference || '').toUpperCase() === ref.toUpperCase());
-  if (!w) return send(chatId, `No watch found with reference ${ref}. Send LIST to see inventory.`);
+  let matches;
+  if (ref.startsWith('#')) {
+    const sid = ref.slice(1).toUpperCase();
+    matches = data.watches.filter(x => (x.stockId || '').toUpperCase() === sid);
+    if (!matches.length) return send(chatId, `No watch found with stock ID ${ref}. Send LIST to see inventory.`);
+  } else {
+    matches = data.watches.filter(x => (x.reference || '').toUpperCase() === ref.toUpperCase());
+    if (!matches.length) return send(chatId, `No watch found with reference ${ref}. Send LIST to see inventory.`);
+  }
+  let w;
+  if (matches.length === 1) w = matches[0];
+  else if (idx && idx >= 1 && idx <= matches.length) w = matches[idx - 1];
+  else {
+    const lines = matches.map((x, i) => `${i + 1}. ${x.stockId ? '#' + x.stockId + ' \u2014 ' : ''}${x.brand} ${x.model} [${x.status}] ${typeof x.price === 'number' ? '$' + x.price.toLocaleString() : x.price}${x.year ? ' \u00B7 ' + x.year : ''}${x.nickname ? ' \u00B7 ' + x.nickname : ''}`);
+    const cmd = label.split(' ')[0].toUpperCase() === 'MARKED' ? 'SOLD' : label.toUpperCase().split(' ')[0];
+    const hint = matches.some(x => x.stockId) ? `${cmd} #${(matches.find(x=>x.stockId)||{}).stockId}` : `${cmd} ${ref} 2`;
+    return send(chatId, `${matches.length} watches share ref ${ref}:\n\n${lines.join('\n')}\n\nUse the stock ID or the number, e.g.:\n${hint}`);
+  }
   fn(w);
   await saveInventory(data, sha, `${label} ${ref} via bot`);
-  await send(chatId, `\u2705 ${w.brand} ${w.model} ${ref}: ${label}. Live in ~2 min.`);
+  await send(chatId, `\u2705 ${w.brand} ${w.model} ${ref}${matches.length > 1 ? ' (#' + (matches.indexOf(w) + 1) + ')' : ''}: ${label}. Live in ~2 min.`);
 }
 
 /* ---------------- Command router ---------------- */
@@ -179,21 +200,29 @@ async function handle(msg) {
     if (upper === 'NO' && pending[chatId]) { delete pending[chatId]; return send(chatId, 'Cancelled.'); }
 
     let m;
-    if ((m = upper.match(/^SOLD\s+(\S+)$/)))
-      return updateWatch(chatId, m[1], w => { w.status = 'Sold'; }, 'marked SOLD');
-    if ((m = upper.match(/^PRICE\s+(\S+)\s+(\S+)$/))) {
+    if ((m = upper.match(/^SOLD\s+(\S+?)(?:\s+(\d))?$/)))
+      return updateWatch(chatId, m[1], w => { w.status = 'Sold'; }, 'marked SOLD', m[2] ? parseInt(m[2],10) : null);
+    if ((m = upper.match(/^PRICE\s+(\S+)\s+(\S+?)(?:\s+(\d))?$/))) {
       const val = m[2] === 'INQUIRE' ? 'Inquire' : parseInt(m[2].replace(/[$,]/g, ''), 10);
       if (val !== 'Inquire' && !(val > 0)) return send(chatId, 'Price not understood. Use: PRICE 126613LB 14700 or PRICE 126613LB INQUIRE');
-      return updateWatch(chatId, m[1], w => { w.price = val; }, `price set to ${val === 'Inquire' ? 'Inquire' : '$' + val.toLocaleString()}`);
+      return updateWatch(chatId, m[1], w => { w.price = val; }, `price set to ${val === 'Inquire' ? 'Inquire' : '$' + val.toLocaleString()}`, m[3] ? parseInt(m[3],10) : null);
     }
-    if ((m = upper.match(/^STATUS\s+(\S+)\s+(AVAILABLE|INCOMING|RESERVED|SOLD)$/))) {
+    if ((m = upper.match(/^STATUS\s+(\S+)\s+(AVAILABLE|INCOMING|RESERVED|SOLD)(?:\s+(\d))?$/))) {
       const st = m[2][0] + m[2].slice(1).toLowerCase();
-      return updateWatch(chatId, m[1], w => { w.status = st; }, `status set to ${st}`);
+      return updateWatch(chatId, m[1], w => { w.status = st; }, `status set to ${st}`, m[3] ? parseInt(m[3],10) : null);
     }
+    if ((m = upper.match(/^SETID\s+(\S+?)(?:\s+(\d))?\s+#?([A-Z0-9]{3,14})$/)))
+      return updateWatch(chatId, m[1], w => { w.stockId = m[3]; }, `stock ID set to #${m[3]}`, m[2] ? parseInt(m[2],10) : null);
     if (upper === 'LIST') {
       const { data } = await getInventory();
-      const lines = data.watches.sort((a, b) => (a.order || 0) - (b.order || 0))
-        .map(w => `${w.status === 'Available' ? '\u{1F7E2}' : w.status === 'Sold' ? '\u{1F534}' : '\u{1F7E1}'} ${w.reference} — ${w.brand} ${w.model} [${w.status}] ${typeof w.price === 'number' ? '$' + w.price.toLocaleString() : w.price}`);
+      const sorted = data.watches.sort((a, b) => (a.order || 0) - (b.order || 0));
+      const refCount = {}; sorted.forEach(w => { refCount[w.reference] = (refCount[w.reference] || 0) + 1; });
+      const seen = {};
+      const lines = sorted.map(w => {
+        seen[w.reference] = (seen[w.reference] || 0) + 1;
+        const tag = refCount[w.reference] > 1 ? ` #${seen[w.reference]}` : '';
+        return `${w.status === 'Available' ? '\u{1F7E2}' : w.status === 'Sold' ? '\u{1F534}' : '\u{1F7E1}'} ${w.reference}${tag}${w.stockId ? ' #' + w.stockId : ''} — ${w.brand} ${w.model} [${w.status}] ${typeof w.price === 'number' ? '$' + w.price.toLocaleString() : w.price}`;
+      });
       return send(chatId, 'INVENTORY\n\n' + lines.join('\n'));
     }
     return send(chatId, ['KC WATCH TRADING — Inventory Bot', '',

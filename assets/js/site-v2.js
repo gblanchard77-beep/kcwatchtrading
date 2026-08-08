@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var nk=document.getElementById('dNick'); nk.textContent=w.nickname?'\u201C'+w.nickname+'\u201D':''; nk.style.display=w.nickname?'':'none';
         var stp=document.getElementById('dStatus'); stp.textContent=w.status; stp.className='a-status'+(w.status==='Sold'?' sold':(w.status==='Incoming'?' incoming':'')); stp.style.position='static'; stp.style.display='inline-block';
         document.getElementById('dPrice').textContent=w.status==='Sold'?'Sold':fmtPrice(w.price);
-        [['dRef',w.reference],['dYear',w.year],['dCard',w.cardDate],['dCondition',w.condition],['dSet',w.set],['dCase',w.caseSize],['dMaterial',w.material],['dDial',w.dial],['dBracelet',w.bracelet],['dIncluded',w.included]].forEach(function(pair){
+        [['dRef',w.reference],['dStockId',w.stockId],['dYear',w.year],['dCard',w.cardDate],['dCondition',w.condition],['dSet',w.set],['dCase',w.caseSize],['dMaterial',w.material],['dDial',w.dial],['dBracelet',w.bracelet],['dIncluded',w.included]].forEach(function(pair){
           var el=document.getElementById(pair[0]); if(!el)return;
           if(!pair[1]){var tr=el.closest('tr'); if(tr)tr.style.display='none';} else el.textContent=pair[1];
         });
