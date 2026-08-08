@@ -221,7 +221,8 @@
       "description": "Rolex Airking ref. 126900. Contact us for full details and photos.",
       "image": "assets/images/rolex-airking-126900.jpg",
       "cardImage": "assets/images/rolex-airking-126900-card.jpg",
-      "order": 10
+      "order": 10,
+      "stockId": "616X3"
     },
     {
       "slug": "rolex-gmt-master-ii-126710blnr",
