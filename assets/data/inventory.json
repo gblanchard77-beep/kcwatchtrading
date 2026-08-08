@@ -245,7 +245,8 @@
       "description": "Rolex GMT Master II “Batgirl” ref. 126710BLNR. Contact us for full details and photos.",
       "image": "assets/images/rolex-gmt-master-ii-126710blnr.jpg",
       "cardImage": "assets/images/rolex-gmt-master-ii-126710blnr-card.jpg",
-      "order": 11
+      "order": 11,
+      "stockId": "Y709XN"
     },
     {
       "slug": "tudor-black-bay-58-7939a1a0nu-001",
