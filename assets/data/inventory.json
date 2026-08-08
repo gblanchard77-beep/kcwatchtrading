@@ -199,7 +199,8 @@
       "description": "Tudor Black BAY Chrono ref. 79360N. Contact us for full details and photos.",
       "image": "assets/images/tudor-black-bay-chrono-79360n.jpg",
       "cardImage": "assets/images/tudor-black-bay-chrono-79360n-card.jpg",
-      "order": 9
+      "order": 9,
+      "stockId": "627BK"
     },
     {
       "slug": "rolex-airking-126900",
