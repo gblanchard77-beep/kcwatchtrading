@@ -2,9 +2,8 @@
 // - Validates contact server-side (email OR phone) — garbage like "milroy" is rejected with 400
 // - Stores EVERY lead to disk FIRST (volume-backed) — source of truth
 // - Telegram alert always shows every field (blanks as —)
-// - MailerLite written SERVER-SIDE (token no longer in the browser)
 // - /admin?key=... lead browser, searchable by name
-// Env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, MAILERLITE_TOKEN, ADMIN_KEY
+// Env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ADMIN_KEY
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -12,8 +11,6 @@ const crypto = require('crypto');
 
 const BOT = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT = process.env.TELEGRAM_CHAT_ID;
-const ML_TOKEN = process.env.MAILERLITE_TOKEN || '';
-const ML_GROUP = '183905202219255711';
 const ADMIN_KEY = process.env.ADMIN_KEY || '';
 const ALLOWED = ['https://kcwatchtrading.com', 'https://www.kcwatchtrading.com'];
 const PORT = process.env.PORT || 3000;
@@ -53,7 +50,7 @@ function readLeads() {
 }
 
 /* ---- outbound ---- */
-async function telegram(d, mlOk) {
+async function telegram(d) {
   const text = [
     '\u{1F310} WEBSITE LEAD', '',
     'Name: ' + dash(d.name),
@@ -63,30 +60,12 @@ async function telegram(d, mlOk) {
     'Details: ' + dash(d.message),
     '',
     'Page: ' + dash(d.page),
-    mlOk === false ? '\u26A0\uFE0F MailerLite save FAILED \u2014 lead is stored on the relay (/admin)' : null
   ].filter(Boolean).join('\n');
   const r = await fetch(`https://api.telegram.org/bot${BOT}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: CHAT, text })
   });
   return r.ok;
-}
-async function mailerlite(d) {
-  if (!ML_TOKEN) return false;
-  const isEmail = validEmail(d.contact);
-  const email = isEmail ? d.contact.trim()
-    : (d.name || 'lead').toLowerCase().replace(/[^a-z]+/g, '.') + '.' + Date.now() + '@inquiry.kcwatchtrading.com';
-  const r = await fetch('https://connect.mailerlite.com/api/subscribers', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + ML_TOKEN },
-    body: JSON.stringify({
-      email,
-      fields: { name: esc(d.name), last_name: '', phone: isEmail ? '' : esc(d.contact),
-        company: esc(d.watch), city: esc(d.intent), country: esc(d.message) },
-      groups: [ML_GROUP], status: 'active', resubscribe: true
-    })
-  });
-  return r.status === 200 || r.status === 201;
 }
 
 /* ---- admin page ---- */
@@ -111,7 +90,7 @@ const f=all.filter(l=>!q||String(l.name||'').toLowerCase().includes(q));
 document.getElementById('count').textContent=f.length+' of '+all.length+' leads';
 document.getElementById('rows').innerHTML=f.map(l=>{
 const c=String(l.contact||'');const link=c.includes('@')?'<a href="mailto:'+esc(c)+'">'+esc(c)+'</a>':'<a href="tel:'+esc(c.replace(/[^\\d+]/g,''))+'">'+esc(c)+'</a>';
-const flags=[l.ml===false?'ML failed':null,l.tg===false?'TG failed':null].filter(Boolean).join(', ');
+const flags=[l.tg===false?'TG alert failed':null].filter(Boolean).join(', ');
 return '<tr><td>'+new Date(l.ts).toLocaleString('en-US',{timeZone:'America/Chicago'})+'</td><td>'+esc(l.name)+'</td><td>'+link+'</td><td>'+(esc(l.watch)||'\\u2014')+'</td><td>'+(esc(l.intent)||'\\u2014')+'</td><td>'+(esc(l.message)||'\\u2014')+'</td><td>'+esc(l.page)+'</td><td class="flag">'+flags+'</td></tr>';}).join('');}
 fetch('/admin/leads?key='+encodeURIComponent(key)).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{all=d.leads;
 if(!d.persistent)document.getElementById('warn').innerHTML='<div class="warn">\\u26A0 Storage volume not attached \\u2014 leads shown here will NOT survive a redeploy. Attach the Railway volume.</div>';
@@ -154,12 +133,11 @@ http.createServer((req, res) => {
         }
         const lead = { id: crypto.randomUUID(), ts: new Date().toISOString(),
           name: esc(d.name), contact: esc(d.contact), watch: esc(d.watch),
-          intent: esc(d.intent), message: esc(d.message), page: esc(d.page), ml: null, tg: null };
+          intent: esc(d.intent), message: esc(d.message), page: esc(d.page), tg: null };
         storeLead(lead); // source of truth — always first
-        let mlOk = null, tgOk = null;
-        try { mlOk = await mailerlite(lead); } catch (e) { mlOk = false; console.error('ML:', e.message); }
-        try { tgOk = await telegram(lead, mlOk); } catch (e) { tgOk = false; console.error('TG:', e.message); }
-        if (mlOk === false || tgOk === false) storeLead({ correction: lead.id, id: lead.id + '-c', ts: lead.ts, ml: mlOk, tg: tgOk });
+        let tgOk = null;
+        try { tgOk = await telegram(lead); } catch (e) { tgOk = false; console.error('TG:', e.message); }
+        if (tgOk === false) storeLead({ correction: lead.id, id: lead.id + '-c', ts: lead.ts, tg: tgOk });
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ ok: true }));
       } catch (e) {
