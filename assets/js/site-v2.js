@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
-/* ---- forms: MailerLite (existing wiring; do not change group) ---- */
+/* ---- forms: deliver via Railway relay -> Telegram ---- */
 /* ---- lead endpoint discovery ---- */
 var LEAD_EP = null;
 var LEAD_EP_P = fetch('lead-endpoint.txt').then(function(r){return r.ok?r.text():''}).then(function(t){
