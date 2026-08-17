@@ -189,3 +189,16 @@ document.addEventListener('click', function(e){
   var a = e.target.closest && e.target.closest('a[href^="tel:"],a[href^="sms:"],a[href^="mailto:"]');
   if(a && window.fbq) fbq('track','Contact');
 }, true);
+
+/* prefill contact intent from query (?intent=...) */
+(function(){
+  var q=new URLSearchParams(location.search).get('intent');
+  if(!q)return;
+  var sel=document.getElementById('fieldIntent');
+  if(!sel)return;
+  var opt=[].find.call(sel.options,function(o){return o.value===q||o.textContent===q});
+  if(opt){sel.value=opt.value||opt.textContent;
+    var w=document.getElementById('fieldWatch');
+    if(w&&q.indexOf('Parfums')!==-1){var lb=document.querySelector('label[for="fieldWatch"]');if(lb)lb.textContent='Fragrance / Interest';w.placeholder='e.g. Nocturne, Zenith, full line';}
+  }
+})();
