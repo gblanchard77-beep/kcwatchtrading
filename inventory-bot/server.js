@@ -68,7 +68,9 @@ const MODELS = { 'SUB DATE': 'Submariner Date', 'SUB ND': 'Submariner', 'SUB': '
   'BB58': 'Black Bay 58', 'BB54': 'Black Bay 54', 'BB CHRONO': 'Black Bay Chrono', 'BB GMT': 'Black Bay GMT' };
 const NICKS = { BATMAN: 'Batman', BATGIRL: 'Batgirl', PEPSI: 'Pepsi', SPRITE: 'Sprite', BLUESY: 'Bluesy',
   'ROOT BEER': 'Root Beer', ROOTBEER: 'Root Beer', KERMIT: 'Kermit', STARBUCKS: 'Starbucks', HULK: 'Hulk',
-  SMURF: 'Smurf', COKE: 'Coke', PANDA: 'Panda' };
+  SMURF: 'Smurf', COKE: 'Coke', PANDA: 'Panda',
+  'BRUCE WAYNE': 'Bruce Wayne', BRUCEWAYNE: 'Bruce Wayne', WIMBLEDON: 'Wimbledon',
+  TIFFANY: 'Tiffany', 'JOHN MAYER': 'John Mayer', HULKGREEN: 'Hulk' };
 
 function parseSpec(text) {
   let s = ' ' + text.toUpperCase().replace(/[,]/g, '').replace(/\s+/g, ' ').trim() + ' ';
@@ -81,7 +83,7 @@ function parseSpec(text) {
   const yr = s.match(/ (19[5-9]\d|20[0-4]\d) /);
   if (yr) { out.year = yr[1]; s = s.replace(yr[0], ' '); }
 
-  for (const [k, v] of [[' BNIB ', 'BNIB'], [' BRAND NEW IN BOX ', 'BNIB'], [' BRAND NEW ', 'BNIB'],
+  for (const [k, v] of [[' BRAND NEW IN BOX ', 'New'], [' BRAND NEW ', 'New'], [' BNIB ', 'New'], [' NEW ', 'New'],
     [' PRE-OWNED ', 'Pre-Owned'], [' PREOWNED ', 'Pre-Owned'], [' UNWORN ', 'Unworn'],
     [' EXCELLENT ', 'Excellent'], [' VERY GOOD ', 'Very Good'], [' GOOD ', 'Good']]) {
     if (s.includes(k)) { out.condition = v; s = s.replace(k, ' '); break; }
@@ -104,7 +106,14 @@ function parseSpec(text) {
   }
   const modelRaw = words.join(' ');
   const ACRO = ['GMT','II','ND','OP','SD','VC','AP','BB'];
-  out.model = MODELS[modelRaw] || (modelRaw ? modelRaw.split(' ').map(w => (/^[A-Z]+$/.test(w) && !ACRO.includes(w) && !/\d/.test(w)) ? w[0] + w.slice(1).toLowerCase() : (w.length > 3 && !/\d/.test(w) ? w[0] + w.slice(1).toLowerCase() : w)).join(' ') : '');
+  // Longest-key-first match so 'BLACK BAY GMT' wins over 'GMT', and unknown
+  // leftover tokens are discarded rather than glued onto the model name.
+  let matched = '';
+  const padded = ' ' + modelRaw + ' ';
+  for (const key of Object.keys(MODELS).sort((a, b) => b.length - a.length)) {
+    if (padded.includes(' ' + key + ' ')) { matched = MODELS[key]; break; }
+  }
+  out.model = matched || (modelRaw ? modelRaw.split(' ').map(w => (/^[A-Z]+$/.test(w) && !ACRO.includes(w) && !/\d/.test(w)) ? w[0] + w.slice(1).toLowerCase() : (w.length > 3 && !/\d/.test(w) ? w[0] + w.slice(1).toLowerCase() : w)).join(' ') : '');
   if (!out.brand && out.model) out.brand = 'Rolex'; // Gary's default sourcing brand
   return out;
 }
@@ -194,10 +203,10 @@ async function handle(msg) {
 
   try {
     if (msg.photo && msg.photo.length) {
-      if (!text) return send(chatId, 'Photo received but no spec line. Send the photo again WITH a caption like:\n2026 RLX SUB DATE 126613LB COMPLETE SET BNIB $14700');
+      if (!text) return send(chatId, 'Photo received but no spec line. Send the photo again WITH a caption like:\n2026 RLX SUB DATE 126613LB COMPLETE SET NEW $14700');
       const e = parseSpec(text);
       if (!e.reference) return send(chatId, 'Could not find a reference number in that caption. Include the ref (e.g. 126613LB) and resend.');
-      if (!e.model) return send(chatId, 'Could not read the model. Try format:\n2026 RLX SUB DATE 126613LB COMPLETE SET BNIB $14700');
+      if (!e.model) return send(chatId, 'Could not read the model. Try format:\n2026 RLX SUB DATE 126613LB COMPLETE SET NEW $14700');
       pending[chatId] = { entry: e, photoFileId: msg.photo[msg.photo.length - 1].file_id };
       return send(chatId, preview(e));
     }
@@ -231,7 +240,7 @@ async function handle(msg) {
       return send(chatId, 'INVENTORY\n\n' + lines.join('\n'));
     }
     return send(chatId, ['KC WATCH TRADING — Inventory Bot', '',
-      '\u{1F4F7} Photo + caption = add a watch:', '   2026 RLX SUB DATE 126613LB COMPLETE SET BNIB $14700', '',
+      '\u{1F4F7} Photo + caption = add a watch:', '   2026 RLX SUB DATE 126613LB COMPLETE SET NEW $14700', '',
       'SOLD 126613LB — mark sold', 'PRICE 126613LB 14700 — set price', 'PRICE 126613LB INQUIRE',
       'STATUS 126613LB Incoming', 'LIST — show all watches'].join('\n'));
   } catch (err) {
