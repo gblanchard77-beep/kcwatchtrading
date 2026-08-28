@@ -453,6 +453,29 @@
       "image": "assets/images/tudor-black-bay-gmt-m79833mn.jpg",
       "cardImage": "assets/images/tudor-black-bay-gmt-m79833mn-card.jpg",
       "order": 20
+    },
+    {
+      "slug": "tudor-black-bay-54-79000n",
+      "status": "Available",
+      "brand": "Tudor",
+      "model": "Black Bay 54",
+      "nickname": "",
+      "reference": "79000N",
+      "stockId": "28922",
+      "year": "2026",
+      "cardDate": "",
+      "condition": "New",
+      "set": "Complete Set",
+      "price": 4500,
+      "caseSize": "",
+      "material": "",
+      "dial": "",
+      "bracelet": "",
+      "included": "Full set",
+      "description": "Tudor Black Bay 54 ref. 79000N. Contact us for full details and photos.",
+      "image": "assets/images/tudor-black-bay-54-79000n.jpg",
+      "cardImage": "assets/images/tudor-black-bay-54-79000n-card.jpg",
+      "order": 21
     }
   ],
   "reviews": [
