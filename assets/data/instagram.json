@@ -1,50 +1,50 @@
 {
-  "updated": "2026-09-03T10:38:13.888Z",
+  "updated": "2026-09-03T15:44:14.678Z",
   "posts": [
     {
       "image": "assets/images/ig/live1.jpg",
-      "permalink": "https://www.instagram.com/p/Dcyq148oAPW/",
+      "permalink": "https://www.instagram.com/p/Dc00KskAdNW/",
       "alt": "INCOMING."
     },
     {
       "image": "assets/images/ig/live2.jpg",
+      "permalink": "https://www.instagram.com/p/Dcyq148oAPW/",
+      "alt": "INCOMING."
+    },
+    {
+      "image": "assets/images/ig/live3.jpg",
       "permalink": "https://www.instagram.com/p/DcvqlN2jomO/",
       "alt": "AVAILABLE — IN STOCK."
     },
     {
-      "image": "assets/images/ig/live3.jpg",
+      "image": "assets/images/ig/live4.jpg",
       "permalink": "https://www.instagram.com/p/DcthP8oDU14/",
       "alt": "The Ladder."
     },
     {
-      "image": "assets/images/ig/live4.jpg",
+      "image": "assets/images/ig/live5.jpg",
       "permalink": "https://www.instagram.com/p/Dcq8c8mCTe9/",
       "alt": "Timing the Market."
     },
     {
-      "image": "assets/images/ig/live5.jpg",
+      "image": "assets/images/ig/live6.jpg",
       "permalink": "https://www.instagram.com/p/DcoXqXMAT7W/",
       "alt": "The Community."
     },
     {
-      "image": "assets/images/ig/live6.jpg",
+      "image": "assets/images/ig/live7.jpg",
       "permalink": "https://www.instagram.com/p/Dcmpy-8AcnP/",
       "alt": "AVAILABLE — IN STOCK."
     },
     {
-      "image": "assets/images/ig/live7.jpg",
+      "image": "assets/images/ig/live8.jpg",
       "permalink": "https://www.instagram.com/p/Dcly3RGDGy8/",
       "alt": "The Perpetual."
     },
     {
-      "image": "assets/images/ig/live8.jpg",
+      "image": "assets/images/ig/live9.jpg",
       "permalink": "https://www.instagram.com/p/DclXZnFDsVE/",
       "alt": "INCOMING."
-    },
-    {
-      "image": "assets/images/ig/live9.jpg",
-      "permalink": "https://www.instagram.com/p/DckFANTDciA/",
-      "alt": "SOLD. Within minutes of landing."
     }
   ]
 }
