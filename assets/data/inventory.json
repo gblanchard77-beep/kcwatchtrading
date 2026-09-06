@@ -476,6 +476,29 @@
       "image": "assets/images/tudor-black-bay-54-79000n.jpg",
       "cardImage": "assets/images/tudor-black-bay-54-79000n-card.jpg",
       "order": 21
+    },
+    {
+      "slug": "rolex-explorer-ii-226570",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "Explorer II",
+      "nickname": "",
+      "reference": "226570",
+      "stockId": "954MJ",
+      "year": "2026",
+      "cardDate": "",
+      "condition": "New",
+      "set": "Complete Set",
+      "price": 12500,
+      "caseSize": "",
+      "material": "",
+      "dial": "",
+      "bracelet": "",
+      "included": "Full set",
+      "description": "Rolex Explorer II ref. 226570. Contact us for full details and photos.",
+      "image": "assets/images/rolex-explorer-ii-226570.jpg",
+      "cardImage": "assets/images/rolex-explorer-ii-226570-card.jpg",
+      "order": 22
     }
   ],
   "reviews": [
