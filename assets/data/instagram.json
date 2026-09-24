@@ -1,50 +1,50 @@
 {
-  "updated": "2026-09-24T11:04:12.508Z",
+  "updated": "2026-09-24T16:27:25.186Z",
   "posts": [
     {
       "image": "assets/images/ig/live1.jpg",
+      "permalink": "https://www.instagram.com/p/Ddq43H7DTUL/",
+      "alt": "AVAILABLE."
+    },
+    {
+      "image": "assets/images/ig/live2.jpg",
       "permalink": "https://www.instagram.com/p/Ddpmd0cAc6V/",
       "alt": "INCOMING."
     },
     {
-      "image": "assets/images/ig/live2.jpg",
+      "image": "assets/images/ig/live3.jpg",
       "permalink": "https://www.instagram.com/p/DdoviLNCCZ3/",
       "alt": "Liquidity Wins"
     },
     {
-      "image": "assets/images/ig/live3.jpg",
+      "image": "assets/images/ig/live4.jpg",
       "permalink": "https://www.instagram.com/p/DdoUEYendYL/",
       "alt": "INCOMING."
     },
     {
-      "image": "assets/images/ig/live4.jpg",
+      "image": "assets/images/ig/live5.jpg",
       "permalink": "https://www.instagram.com/p/DdnBq56jHe8/",
       "alt": "INCOMING."
     },
     {
-      "image": "assets/images/ig/live5.jpg",
+      "image": "assets/images/ig/live6.jpg",
       "permalink": "https://www.instagram.com/p/DdmKw1-iFa8/",
       "alt": "Condition Is the Deal"
     },
     {
-      "image": "assets/images/ig/live6.jpg",
+      "image": "assets/images/ig/live7.jpg",
       "permalink": "https://www.instagram.com/p/DdlvRvdAeI1/",
       "alt": "INCOMING."
     },
     {
-      "image": "assets/images/ig/live7.jpg",
+      "image": "assets/images/ig/live8.jpg",
       "permalink": "https://www.instagram.com/p/Ddjl8_ZD0UW/",
       "alt": "Fair Beats Perfect"
     },
     {
-      "image": "assets/images/ig/live8.jpg",
+      "image": "assets/images/ig/live9.jpg",
       "permalink": "https://www.instagram.com/p/DdhBJJPgScb/",
       "alt": "Fair Beats Perfect"
-    },
-    {
-      "image": "assets/images/ig/live9.jpg",
-      "permalink": "https://www.instagram.com/p/DdecX2KCnnz/",
-      "alt": "The Complete Set"
     }
   ]
 }
