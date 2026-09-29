@@ -163,6 +163,7 @@ async function submitLeadForm(o){
       btn.textContent=o.btnLabel||'Send Inquiry \u2192';btn.disabled=false;return}
     if(!r.ok)throw new Error('relay '+r.status);
     if(window.fbq)fbq('track','Lead',{content_category:o.intent||'inquiry',content_name:(o.watchInfo||'').substring(0,90)});
+    if(typeof gtag==='function')gtag('event','generate_lead',{content_category:o.intent||'inquiry',content_name:(o.watchInfo||'').substring(0,90)});
     msg.style.display='block';msg.style.color='#7a6434';msg.textContent=o.successMsg||'Inquiry received. We will be in touch within 24 hours.';
     btn.textContent='Sent \u2713';(o.clearIds||[]).forEach(function(id){var el=document.getElementById(id);if(el)el.value=''});
   }catch(e){
@@ -187,7 +188,9 @@ function submitSource(){
 /* Contact-intent tracking: phone/text/email taps */
 document.addEventListener('click', function(e){
   var a = e.target.closest && e.target.closest('a[href^="tel:"],a[href^="sms:"],a[href^="mailto:"]');
-  if(a && window.fbq) fbq('track','Contact');
+  if(!a) return;
+  if(window.fbq) fbq('track','Contact');
+  if(typeof gtag==='function') gtag('event','generate_lead');
 }, true);
 
 /* prefill contact intent from query (?intent=...) */
