@@ -1,50 +1,50 @@
 {
-  "updated": "2026-09-29T12:04:58.408Z",
+  "updated": "2026-09-29T21:49:18.914Z",
   "posts": [
     {
       "image": "assets/images/ig/live1.jpg",
+      "permalink": "https://www.instagram.com/p/Dd4MTpngXgQ/",
+      "alt": "A stock photo shows you the model. It doesn't show you the watch."
+    },
+    {
+      "image": "assets/images/ig/live2.jpg",
+      "permalink": "https://www.instagram.com/p/Dd3w163gXqH/",
+      "alt": "INCOMING"
+    },
+    {
+      "image": "assets/images/ig/live3.jpg",
       "permalink": "https://www.instagram.com/p/Dd1ngmMjHg4/",
       "alt": "Checking a watch comes down to the details you can see up close."
     },
     {
-      "image": "assets/images/ig/live2.jpg",
+      "image": "assets/images/ig/live4.jpg",
       "permalink": "https://www.instagram.com/p/Ddt5Hy0DBgT/",
       "alt": "Without the Wait"
     },
     {
-      "image": "assets/images/ig/live3.jpg",
+      "image": "assets/images/ig/live5.jpg",
       "permalink": "https://www.instagram.com/p/DdsLQm5EdW_/",
       "alt": "SOLD."
     },
     {
-      "image": "assets/images/ig/live4.jpg",
+      "image": "assets/images/ig/live6.jpg",
       "permalink": "https://www.instagram.com/p/DdrUVRWj59l/",
       "alt": "Wear It or Pass"
     },
     {
-      "image": "assets/images/ig/live5.jpg",
+      "image": "assets/images/ig/live7.jpg",
       "permalink": "https://www.instagram.com/p/Ddq43H7DTUL/",
       "alt": "AVAILABLE."
     },
     {
-      "image": "assets/images/ig/live6.jpg",
+      "image": "assets/images/ig/live8.jpg",
       "permalink": "https://www.instagram.com/p/Ddpmd0cAc6V/",
       "alt": "INCOMING."
     },
     {
-      "image": "assets/images/ig/live7.jpg",
+      "image": "assets/images/ig/live9.jpg",
       "permalink": "https://www.instagram.com/p/DdoviLNCCZ3/",
       "alt": "Liquidity Wins"
-    },
-    {
-      "image": "assets/images/ig/live8.jpg",
-      "permalink": "https://www.instagram.com/p/DdoUEYendYL/",
-      "alt": "INCOMING."
-    },
-    {
-      "image": "assets/images/ig/live9.jpg",
-      "permalink": "https://www.instagram.com/p/DdnBq56jHe8/",
-      "alt": "INCOMING."
     }
   ]
 }
