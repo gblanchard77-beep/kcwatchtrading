@@ -614,6 +614,29 @@
       "image": "assets/images/rolex-gmt-master-ii-kc10179.jpg",
       "cardImage": "assets/images/rolex-gmt-master-ii-kc10179-card.jpg",
       "order": 29
+    },
+    {
+      "slug": "rolex-submariner-date-kc10176",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "Submariner Date",
+      "nickname": "",
+      "reference": "126610LN",
+      "stockId": "KC10176",
+      "year": "2023",
+      "cardDate": "",
+      "condition": "Pre-Owned",
+      "set": "Complete Set",
+      "price": 14500,
+      "caseSize": "",
+      "material": "",
+      "dial": "",
+      "bracelet": "",
+      "included": "Box and warranty card",
+      "description": "Rolex Submariner Date ref. 126610LN. Complete set with box and warranty card. Contact us for full details and photos.",
+      "image": "assets/images/rolex-submariner-date-kc10176.jpg",
+      "cardImage": "assets/images/rolex-submariner-date-kc10176-card.jpg",
+      "order": 30
     }
   ],
   "reviews": [
