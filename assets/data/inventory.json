@@ -660,6 +660,29 @@
       "image": "assets/images/rolex-gmt-master-ii-kc10178-2.jpg",
       "cardImage": "assets/images/rolex-gmt-master-ii-kc10178-2-card.jpg",
       "order": 31
+    },
+    {
+      "slug": "rolex-submariner-date-kc10176-2",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "Submariner Date",
+      "nickname": "",
+      "reference": "KC10176",
+      "stockId": "",
+      "year": "2023",
+      "cardDate": "",
+      "condition": "Excellent",
+      "set": "Complete Set",
+      "price": 14500,
+      "caseSize": "",
+      "material": "",
+      "dial": "",
+      "bracelet": "",
+      "included": "Full set",
+      "description": "Rolex Submariner Date ref. KC10176. Contact us for full details and photos.",
+      "image": "assets/images/rolex-submariner-date-kc10176-2.jpg",
+      "cardImage": "assets/images/rolex-submariner-date-kc10176-2-card.jpg",
+      "order": 32
     }
   ],
   "reviews": [
