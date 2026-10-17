@@ -1,13 +1,16 @@
 // KC Watch Trading — lead relay v2
 // - Validates contact server-side (email OR phone) — garbage like "milroy" is rejected with 400
-// - Stores EVERY lead to disk FIRST (volume-backed) — source of truth
-// - Telegram alert always shows every field (blanks as —)
+// - Stores EVERY lead to Postgres (website_leads) BEFORE alerting — source of truth.
+//   DB down/slow/unset -> lead is queued on disk (volume if attached) and retried every minute.
+// - Also appends a local journal (leads.jsonl) for /admin, as before
+// - Telegram alert always shows every field (blanks as —) plus whether it was saved
 // - /admin?key=... lead browser, searchable by name
-// Env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ADMIN_KEY
+// Env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ADMIN_KEY, DATABASE_URL (optional; ${{Postgres.DATABASE_URL}})
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { createStore } = require('./store');
 
 const BOT = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT = process.env.TELEGRAM_CHAT_ID;
@@ -18,7 +21,21 @@ const PORT = process.env.PORT || 3000;
 const DATA_DIR = process.env.RAILWAY_VOLUME_MOUNT_PATH || '/tmp';
 const PERSISTENT = !!process.env.RAILWAY_VOLUME_MOUNT_PATH;
 const LEADS_FILE = path.join(DATA_DIR, 'leads.jsonl');
+const PENDING_FILE = path.join(DATA_DIR, 'pending-db.jsonl');
 try { fs.mkdirSync(DATA_DIR, { recursive: true }); } catch (e) {}
+
+function makePool() {
+  const url = process.env.DATABASE_URL;
+  if (!url) return null;
+  const { Pool } = require('pg');
+  return new Pool({
+    connectionString: url,
+    // Same rule as kcwt-lead-alert: private network needs no SSL, public URL does.
+    ssl: url.includes('railway.internal') ? false : { rejectUnauthorized: false },
+    max: 3,
+    connectionTimeoutMillis: 3000,
+  });
+}
 
 let windowStart = Date.now(), count = 0;
 function limited() {
@@ -50,7 +67,13 @@ function readLeads() {
 }
 
 /* ---- outbound ---- */
-async function telegram(d) {
+function savedLine(saved) {
+  if (!saved) return '';
+  if (saved.db) return 'Saved: database \u2713';
+  if (!saved.queued) return '\u26A0 Saved: NOWHERE \u2014 DB and disk queue both failed. This message is the only copy.';
+  return '\u26A0 Saved: NOT in database yet \u2014 queued on ' + (PERSISTENT ? 'volume, will retry' : '/tmp (NOT persistent), will retry');
+}
+async function telegram(d, saved) {
   const text = [
     '\u{1F310} WEBSITE LEAD', '',
     'Name: ' + dash(d.name),
@@ -60,6 +83,7 @@ async function telegram(d) {
     'Details: ' + dash(d.message),
     '',
     'Page: ' + dash(d.page),
+    savedLine(saved),
   ].filter(Boolean).join('\n');
   const r = await fetch(`https://api.telegram.org/bot${BOT}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -99,7 +123,8 @@ document.getElementById('q').addEventListener('input',render);
 </script></body></html>`;
 
 /* ---- server ---- */
-http.createServer((req, res) => {
+function buildServer({ store, sendTelegram = telegram }) {
+return http.createServer((req, res) => {
   const u = new URL(req.url, 'http://x');
   const origin = req.headers.origin || '';
 
@@ -131,13 +156,18 @@ http.createServer((req, res) => {
           res.writeHead(400, { 'Content-Type': 'application/json' });
           return res.end(JSON.stringify({ ok: false, error: 'invalid_contact' }));
         }
-        const lead = { id: crypto.randomUUID(), ts: new Date().toISOString(),
-          name: esc(d.name), contact: esc(d.contact), watch: esc(d.watch),
+        const contact = esc(d.contact);
+        const lead = { id: crypto.randomUUID(), ts: new Date().toISOString(), source: 'site_form',
+          name: esc(d.name), contact, watch: esc(d.watch),
+          contact_email: validEmail(contact) ? contact.trim() : null,
+          contact_phone: !validEmail(contact) && validPhone(contact) ? contact.trim() : null,
           intent: esc(d.intent), message: esc(d.message), page: esc(d.page), tg: null };
-        storeLead(lead); // source of truth — always first
+        try { storeLead(lead); } catch (e) { console.error('journal:', e.message); } // local journal for /admin
+        const saved = await store.save(lead); // Postgres first; queued on disk if the DB fails
         let tgOk = null;
-        try { tgOk = await telegram(lead); } catch (e) { tgOk = false; console.error('TG:', e.message); }
-        if (tgOk === false) storeLead({ correction: lead.id, id: lead.id + '-c', ts: lead.ts, tg: tgOk });
+        try { tgOk = await sendTelegram(lead, saved); } catch (e) { tgOk = false; console.error('TG:', e.message); }
+        if (tgOk === false) { try { storeLead({ correction: lead.id, id: lead.id + '-c', ts: lead.ts, tg: tgOk }); } catch (e) {} }
+        if (saved.db) store.markTelegram(lead.id, tgOk !== false);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ ok: true }));
       } catch (e) {
@@ -148,4 +178,20 @@ http.createServer((req, res) => {
     return;
   }
   res.writeHead(200); res.end('kcwt lead relay v2');
-}).listen(PORT, () => console.log(`lead relay v2 on :${PORT} | storage: ${LEADS_FILE} (${PERSISTENT ? 'persistent' : 'NOT PERSISTENT - attach volume'})`));
+});
+}
+
+if (require.main === module) {
+  const pool = makePool();
+  const store = createStore({ pool, pendingFile: PENDING_FILE });
+  buildServer({ store }).listen(PORT, async () => {
+    console.log(`lead relay v2 on :${PORT} | journal: ${LEADS_FILE} (${PERSISTENT ? 'persistent' : 'NOT PERSISTENT - attach volume'})`
+      + ` | db: ${pool ? 'website_leads (Postgres)' : 'OFF - set DATABASE_URL'} | queue: ${PENDING_FILE}`);
+    if (pool && await store.init()) await store.flushPending();
+    const queued = store.pendingCount();
+    if (queued) console.log(`WARNING: ${queued} lead(s) waiting in ${PENDING_FILE}`);
+  });
+  setInterval(() => { store.flushPending(); }, 60 * 1000).unref();
+}
+
+module.exports = { buildServer, telegram, savedLine };
