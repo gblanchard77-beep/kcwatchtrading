@@ -466,7 +466,7 @@ fetch('assets/data/inventory.json').then(function(r){return r.json()}).then(func
   }
   if(ws.length===1){
     var w=ws[0];
-    el.innerHTML='<a class="a-featured" href="watch.html?w='+encodeURIComponent(w.slug)+'"><img src="'+w.image+'" alt="'+w.brand+' '+w.model+'">'+
+    el.innerHTML='<a class="a-featured" href="/watches/'+encodeURIComponent(w.slug)+'/"><img src="'+w.image+'" alt="'+w.brand+' '+w.model+'">'+
     '<div class="a-featured-info"><span class="a-status" style="position:static;align-self:flex-start;">Available</span>'+
     '<span class="a-brand">'+w.brand+'</span><span class="a-model">'+w.model+(w.nickname?' “'+w.nickname+'”':'')+'</span>'+
     '<span class="a-meta">'+meta(w)+'</span><span class="a-price">'+price(w)+'</span>'+
@@ -474,7 +474,7 @@ fetch('assets/data/inventory.json').then(function(r){return r.json()}).then(func
     return;
   }
   el.innerHTML='<div class="avail-grid n'+ws.length+'">'+ws.map(function(w){
-    return '<a class="a-card" href="watch.html?w='+encodeURIComponent(w.slug)+'"><span class="a-status">Available</span><img src="'+w.image+'" alt="'+w.brand+' '+w.model+' '+(w.reference||'')+'">'+
+    return '<a class="a-card" href="/watches/'+encodeURIComponent(w.slug)+'/"><span class="a-status">Available</span><img src="'+w.image+'" alt="'+w.brand+' '+w.model+' '+(w.reference||'')+'">'+
     '<div class="a-info"><span class="a-brand">'+w.brand+'</span><span class="a-model">'+w.model+(w.nickname?' “'+w.nickname+'”':'')+'</span>'+
     '<span class="a-meta">'+meta(w)+'</span><span class="a-price">'+price(w)+'</span></div></a>';
   }).join('')+'</div>';

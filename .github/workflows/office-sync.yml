@@ -1,0 +1,53 @@
+# Office -> website inventory sync. Activated 2026-10-17 (approved by Gary). Needs repository secret OFFICE_WEBSITE_FEED_URL.
+# Rollback: gh workflow disable office-sync.yml, or rename back to .yml.draft.
+name: Office inventory sync
+
+on:
+  schedule:
+    - cron: '7,27,47 * * * *'     # every 20 minutes (GitHub may delay scheduled runs at busy times)
+  workflow_dispatch: {}            # "Run workflow" button for an immediate sync
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-main-writer          # never two syncs at once
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Pull inventory from Office (writes only if something changed)
+        env:
+          OFFICE_WEBSITE_FEED_URL: ${{ secrets.OFFICE_WEBSITE_FEED_URL }}   # Office > Channels > Website > the JSON link (contains the feed key)
+        run: python scripts/office-sync.py --msg-file "$RUNNER_TEMP/msg.txt"
+
+      - name: Build per-watch pages and sitemap
+        run: python scripts/build-watch-pages.py
+
+      - name: Commit once, only if something changed
+        run: |
+          git config user.name "kcwt-office-sync"
+          git config user.email "feed-bot@kcwatchtrading.com"
+          git add -A assets/data/inventory.json assets/images/office watches sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No change - no commit."
+            exit 0
+          fi
+          [ -s "$RUNNER_TEMP/msg.txt" ] || echo "Office sync: pages rebuilt" > "$RUNNER_TEMP/msg.txt"
+          git commit -F "$RUNNER_TEMP/msg.txt"
+          for i in 1 2 3; do
+            git pull --rebase --quiet && git push && exit 0
+            sleep 10
+          done
+          echo "Push failed after 3 tries"; exit 1

@@ -30,7 +30,7 @@ function fmtPrice(p){ if(p===undefined||p===null||p==='')return 'Inquire'; retur
 function cardHTML(w, showSold){
   var st=w.status, cls=st==='Sold'?' sold':(st==='Incoming'?' incoming':'');
   var meta=[w.reference,w.year,w.condition,w.set].filter(Boolean).join(' · ');
-  return '<a class="a-card'+(st==='Sold'?' sold-fade':'')+'" href="watch.html?w='+encodeURIComponent(w.slug)+'">'+
+  return '<a class="a-card'+(st==='Sold'?' sold-fade':'')+'" href="/watches/'+encodeURIComponent(w.slug)+'/">'+
     '<span class="a-status'+cls+'">'+st+'</span>'+
     '<img loading="lazy" src="'+(w.cardImage||w.image)+'" alt="'+w.brand+' '+w.model+' '+(w.reference||'')+'">'+
     '<div class="a-info"><span class="a-brand">'+w.brand+'</span>'+
