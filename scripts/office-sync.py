@@ -17,6 +17,7 @@ import argparse, datetime, json, os, re, subprocess, sys, urllib.parse, urllib.r
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 INV = os.path.join(ROOT, 'assets', 'data', 'inventory.json')
+SOLD_OVERRIDES = os.path.join(ROOT, 'assets', 'data', 'sold-overrides.json')   # ["KC10174", ...]: forced Sold even if Office still says otherwise
 IMG_DIR = 'assets/images/office'                 # repo-relative; one folder per slug
 UA = 'kcwt-office-sync/1.0 (+https://kcwatchtrading.com)'
 MAX_GALLERY = int(os.environ.get('OFFICE_SYNC_MAX_PHOTOS', '12'))
@@ -87,8 +88,21 @@ def auto_description(e):
     return ' '.join(x for x in (s1, s2, s3, s4, 'Contact us for full details.') if x)
 
 
+def load_sold_overrides():
+    """Stock IDs sold outside Office before Office was updated. Remove an ID once Office marks it sold (or delete the file)."""
+    try:
+        ids = json.load(open(SOLD_OVERRIDES, encoding='utf-8'))
+        return {str(x).strip().upper() for x in ids if str(x).strip()}
+    except FileNotFoundError:
+        return set()
+
+
+SOLD_IDS = load_sold_overrides()
+
+
 def office_status(w):
     if w.get('sold'): return 'Sold'
+    if (w.get('sku') or '').strip().upper() in SOLD_IDS: return 'Sold'   # sold-overrides.json wins over Office Available/Reserved
     if w.get('reserved'): return 'Reserved'                      # Office "Mark these as Reserved" statuses, e.g. Pending sale
     if (w.get('badge') or '') == 'Arriving soon': return 'Incoming'
     return 'Available'
@@ -199,6 +213,7 @@ def main():
 
     raw = open(INV, encoding='utf-8').read(); inv = json.loads(raw); watches = inv['watches']
     live_on_site = [e for e in watches if e.get('status') != 'Sold']
+    if SOLD_IDS: log('Sold overrides:', ', '.join(sorted(SOLD_IDS)))
     if not office and live_on_site:
         log('Safety stop: Office returned 0 watches while the site shows', len(live_on_site), '- is the Office Website channel switched off? Nothing changed.'); return 3
 
