@@ -2,7 +2,8 @@
 """KC Watch Trading: build one static, indexable page per watch from assets/data/inventory.json.
 
 Writes watches/<slug>/index.html (real HTML, unique title/description, self canonical, Open Graph, Product + Offer JSON-LD,
-the same header/footer/inquiry form as watch.html) and regenerates sitemap.xml (static pages kept + every watch URL).
+the same header/footer/inquiry form as watch.html; Product JSON-LD only for watches with a priced Offer, so Sold
+pages and price-on-inquiry pages carry none: Google product snippets reject a Product without offers/review/rating) and regenerates sitemap.xml (static pages kept + every watch URL).
 Deterministic: the same inventory.json always produces byte-identical files, so a run with no inventory change makes no diff.
 Removes pages of watches that are no longer in inventory.json (only folders this script made). Standard library only.
 """
@@ -63,6 +64,9 @@ def meta_desc(w):
 
 
 def jsonld(w, url, pics):
+    # Google product snippets need offers, review or aggregateRating on every Product. Sold watches hide their price and
+    # unpriced watches have no Offer, so emit no Product for them (never fake reviews/ratings, never expose a sold price).
+    if w.get('status') == 'Sold' or not isinstance(w.get('price'), int): return ''
     cond_new = (w.get('condition') or '').lower() in ('new', 'unworn', 'brand new')
     p = {'@context': 'https://schema.org', '@type': 'Product', 'name': full(w), 'url': url,
          'brand': {'@type': 'Brand', 'name': w.get('brand') or ''}, 'sku': w.get('stockId') or w['slug'], 'mpn': w.get('reference') or None,
@@ -106,7 +110,8 @@ def page(w, inv, head, header, footer):
         form_h = 'Inquire About This Watch'; intent = 'Buy a specific watch'; field_watch = watch_label; cta = ''
     related = [x for x in sorted(inv['watches'], key=lambda x: x.get('order') or 99) if x['slug'] != slug and x.get('status') != 'Sold'][:3]
     og_img = f'<meta property="og:image" content="{E(absu(pics[0]))}">' if pics else ''
-    t = title(w); d = meta_desc(w)
+    t = title(w); d = meta_desc(w); ld = jsonld(w, url, pics)
+    ld = f'\n<script type="application/ld+json">\n{ld}\n</script>' if ld else ''
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,10 +123,7 @@ def page(w, inv, head, header, footer):
 <meta property="og:description" content="{E(d)}">
 <meta property="og:type" content="product">
 <meta property="og:url" content="{url}">
-{og_img}
-<script type="application/ld+json">
-{jsonld(w, url, pics)}
-</script>
+{og_img}{ld}
 </head>
 <body>
 {MARK}{header}<main>
