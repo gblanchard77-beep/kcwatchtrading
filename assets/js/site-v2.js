@@ -152,6 +152,15 @@ async function submitLeadForm(o){
     return}
   btn.textContent='Sending...';btn.disabled=true;msg.style.display='none';
   var payload={name:name,contact:contact,watch:o.watchInfo||'',intent:o.intent||'General inquiry',message:o.message||'',page:location.pathname+location.search};
+  var smsCb=document.getElementById('smsConsent');
+  if(smsCb){
+    payload.sms_consent=!!smsCb.checked;
+    if(smsCb.checked){
+      var smsLb=document.getElementById('smsConsentLabel');
+      payload.sms_consent_text=smsLb?smsLb.innerText.replace(/\s+/g,' ').trim():'';
+      payload.sms_consent_at=new Date().toISOString();
+    }
+  }
   try{
     await LEAD_EP_P;
     if(!LEAD_EP)throw new Error('no endpoint');

@@ -83,6 +83,7 @@ async function telegram(d, saved) {
     'Details: ' + dash(d.message),
     '',
     'Page: ' + dash(d.page),
+    'SMS consent: ' + (d.sms_consent === true ? '\u2705 YES' : '\u2014'),
     savedLine(saved),
   ].filter(Boolean).join('\n');
   const r = await fetch(`https://api.telegram.org/bot${BOT}/sendMessage`, {
@@ -104,7 +105,7 @@ td a{color:#E8D6A6}</style></head><body>
 <h1>KC Watch Trading \u2014 Website Leads</h1><div id="warn"></div>
 <input id="q" placeholder="Search by name..." autofocus>
 <div class="count" id="count"></div>
-<table><thead><tr><th>When (CST)</th><th>Name</th><th>Contact</th><th>Watch</th><th>Intent</th><th>Details</th><th>Page</th><th>Flags</th></tr></thead><tbody id="rows"></tbody></table>
+<table><thead><tr><th>When (CST)</th><th>Name</th><th>Contact</th><th>Watch</th><th>Intent</th><th>Details</th><th>Page</th><th>SMS</th><th>Flags</th></tr></thead><tbody id="rows"></tbody></table>
 <script>
 const key=new URLSearchParams(location.search).get('key');
 let all=[];
@@ -115,7 +116,7 @@ document.getElementById('count').textContent=f.length+' of '+all.length+' leads'
 document.getElementById('rows').innerHTML=f.map(l=>{
 const c=String(l.contact||'');const link=c.includes('@')?'<a href="mailto:'+esc(c)+'">'+esc(c)+'</a>':'<a href="tel:'+esc(c.replace(/[^\\d+]/g,''))+'">'+esc(c)+'</a>';
 const flags=[l.tg===false?'TG alert failed':null].filter(Boolean).join(', ');
-return '<tr><td>'+new Date(l.ts).toLocaleString('en-US',{timeZone:'America/Chicago'})+'</td><td>'+esc(l.name)+'</td><td>'+link+'</td><td>'+(esc(l.watch)||'\\u2014')+'</td><td>'+(esc(l.intent)||'\\u2014')+'</td><td>'+(esc(l.message)||'\\u2014')+'</td><td>'+esc(l.page)+'</td><td class="flag">'+flags+'</td></tr>';}).join('');}
+return '<tr><td>'+new Date(l.ts).toLocaleString('en-US',{timeZone:'America/Chicago'})+'</td><td>'+esc(l.name)+'</td><td>'+link+'</td><td>'+(esc(l.watch)||'\\u2014')+'</td><td>'+(esc(l.intent)||'\\u2014')+'</td><td>'+(esc(l.message)||'\\u2014')+'</td><td>'+esc(l.page)+'</td><td>'+(l.sms_consent===true?'\\u2705':'\\u2014')+'</td><td class="flag">'+flags+'</td></tr>';}).join('');}
 fetch('/admin/leads?key='+encodeURIComponent(key)).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{all=d.leads;
 if(!d.persistent)document.getElementById('warn').innerHTML='<div class="warn">\\u26A0 Storage volume not attached \\u2014 leads shown here will NOT survive a redeploy. Attach the Railway volume.</div>';
 render();}).catch(()=>{document.body.innerHTML='<h1>Unauthorized</h1><p>Missing or wrong key.</p>'});
@@ -161,7 +162,10 @@ return http.createServer((req, res) => {
           name: esc(d.name), contact, watch: esc(d.watch),
           contact_email: validEmail(contact) ? contact.trim() : null,
           contact_phone: !validEmail(contact) && validPhone(contact) ? contact.trim() : null,
-          intent: esc(d.intent), message: esc(d.message), page: esc(d.page), tg: null };
+          intent: esc(d.intent), message: esc(d.message), page: esc(d.page), tg: null,
+          sms_consent: typeof d.sms_consent === 'boolean' ? d.sms_consent : null,
+          sms_consent_text: typeof d.sms_consent === 'boolean' ? String(d.sms_consent_text || '').slice(0, 800) || null : null,
+          sms_consent_at: d.sms_consent === true ? (typeof d.sms_consent_at === 'string' && d.sms_consent_at.length <= 40 ? d.sms_consent_at : new Date().toISOString()) : null };
         try { storeLead(lead); } catch (e) { console.error('journal:', e.message); } // local journal for /admin
         const saved = await store.save(lead); // Postgres first; queued on disk if the DB fails
         let tgOk = null;

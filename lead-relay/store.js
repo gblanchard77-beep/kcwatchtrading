@@ -23,13 +23,16 @@ CREATE TABLE IF NOT EXISTS website_leads (
   notes          TEXT
 );
 CREATE INDEX IF NOT EXISTS website_leads_received_at_idx ON website_leads (received_at DESC);
+ALTER TABLE website_leads ADD COLUMN IF NOT EXISTS sms_consent BOOLEAN;
+ALTER TABLE website_leads ADD COLUMN IF NOT EXISTS sms_consent_text TEXT;
+ALTER TABLE website_leads ADD COLUMN IF NOT EXISTS sms_consent_at TIMESTAMPTZ;
 `;
 
 const INSERT_SQL = `
 INSERT INTO website_leads
   (lead_uid, received_at, source, name, contact, contact_email, contact_phone,
-   watch, intent, message, page)
-VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+   watch, intent, message, page, sms_consent, sms_consent_text, sms_consent_at)
+VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
 ON CONFLICT (lead_uid) DO NOTHING`;
 
 const TG_SQL = `UPDATE website_leads SET tg_ok = $2 WHERE lead_uid = $1`;
@@ -47,6 +50,9 @@ function insertParams(lead) {
     lead.id, lead.ts, lead.source || 'site_form', lead.name, lead.contact,
     lead.contact_email || null, lead.contact_phone || null,
     lead.watch || null, lead.intent || null, lead.message || null, lead.page || null,
+    typeof lead.sms_consent === 'boolean' ? lead.sms_consent : null,
+    lead.sms_consent_text || null,
+    lead.sms_consent_at || null,
   ];
 }
 
