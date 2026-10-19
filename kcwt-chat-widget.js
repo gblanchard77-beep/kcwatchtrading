@@ -117,7 +117,7 @@
         <button class="pchip" data-t="papers">Box, papers &amp; accessories</button>
         <button class="pchip cancel" data-t="cancel">Cancel</button>
       </div>
-      <div style="padding:4px 14px 2px;font-size:10px;color:#666;font-family:var(--sans);line-height:1.4;">Replies may be written by an automated assistant. By chatting you agree to our <a href="/privacy.html" style="color:#8f815f;">Privacy Policy</a>.</div><div class="cfoot">
+      <div class="cfoot">
         <button class="attach" id="attach" aria-label="Add photo">
           <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7L10 18.2a1.6 1.6 0 0 1-2.3-2.3l7.8-7.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
