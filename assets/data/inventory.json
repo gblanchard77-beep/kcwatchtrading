@@ -41,7 +41,7 @@
     },
     {
       "slug": "rolex-gmt-master-ii-kc10184",
-      "status": "Available",
+      "status": "Reserved",
       "brand": "Rolex",
       "model": "GMT-Master II",
       "nickname": "Batman",
@@ -77,7 +77,7 @@
         "assets/images/office/rolex-gmt-master-ii-kc10184/188.jpg",
         "assets/images/office/rolex-gmt-master-ii-kc10184/168.jpg"
       ],
-      "updated": "2026-10-17"
+      "updated": "2026-10-20"
     },
     {
       "slug": "rolex-submariner-kc10183",
@@ -861,9 +861,10 @@
       "descAuto": true,
       "source": "office",
       "gallery": [
-        "assets/images/office/rolex-yacht-master-42-kcwt-1006/193.jpg"
+        "assets/images/office/rolex-yacht-master-42-kcwt-1006/193.jpg",
+        "assets/images/office/rolex-yacht-master-42-kcwt-1006/194.jpg"
       ],
-      "updated": "2026-10-17"
+      "updated": "2026-10-20"
     }
   ],
   "reviews": [
