@@ -1,68 +1,68 @@
 {
-  "updated": "2026-10-20T16:18:38.456Z",
+  "updated": "2026-10-20T21:12:50.296Z",
   "posts": [
     {
       "image": "assets/images/ig/live1.jpg",
+      "permalink": "https://www.instagram.com/p/DeuRAApjy5J/",
+      "alt": "Buying a Rolex or Tudor from us? Here's what happens, start to finish.",
+      "timestamp": "2026-10-20T16:30:08+0000",
+      "media_type": "carousel"
+    },
+    {
+      "image": "assets/images/ig/live2.jpg",
       "permalink": "https://www.instagram.com/p/Det1hvljf5_/",
       "alt": "SOLD.",
       "timestamp": "2026-10-20T12:30:05+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live2.jpg",
+      "image": "assets/images/ig/live3.jpg",
       "permalink": "https://www.instagram.com/p/DersMwOjO2m/",
       "alt": "No box? No papers? Still ask.",
       "timestamp": "2026-10-19T16:30:05+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live3.jpg",
+      "image": "assets/images/ig/live4.jpg",
       "permalink": "https://www.instagram.com/p/DerQu2cjI-l/",
       "alt": "SOLD.",
       "timestamp": "2026-10-19T12:30:05+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live4.jpg",
+      "image": "assets/images/ig/live5.jpg",
       "permalink": "https://www.instagram.com/p/Deor8ObDthF/",
       "alt": "SOLD.",
       "timestamp": "2026-10-18T12:30:07+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live5.jpg",
+      "image": "assets/images/ig/live6.jpg",
       "permalink": "https://www.instagram.com/p/Demim_-CehA/",
       "alt": "Ready for something new? The watch you have can help get you there.",
       "timestamp": "2026-10-17T16:30:06+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live6.jpg",
+      "image": "assets/images/ig/live7.jpg",
       "permalink": "https://www.instagram.com/p/DemHJQgCXmS/",
       "alt": "SOLD.",
       "timestamp": "2026-10-17T12:30:06+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live7.jpg",
+      "image": "assets/images/ig/live8.jpg",
       "permalink": "https://www.instagram.com/p/Dej90SniA8V/",
       "alt": "Some watches you have to see in person.",
       "timestamp": "2026-10-16T16:30:08+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live8.jpg",
+      "image": "assets/images/ig/live9.jpg",
       "permalink": "https://www.instagram.com/p/DehZBMtFFNt/",
       "alt": "Inherited a Rolex? Start here.",
       "timestamp": "2026-10-15T16:30:05+0000",
       "media_type": "image"
-    },
-    {
-      "image": "assets/images/ig/live9.jpg",
-      "permalink": "https://www.instagram.com/p/Dee0OoglLIA/",
-      "alt": "Three details you only see up close. (Swipe →)",
-      "timestamp": "2026-10-14T16:30:07+0000",
-      "media_type": "carousel"
     }
   ]
 }
