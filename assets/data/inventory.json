@@ -838,7 +838,7 @@
     },
     {
       "slug": "rolex-yacht-master-42-kcwt-1006",
-      "status": "Reserved",
+      "status": "Sold",
       "brand": "Rolex",
       "model": "Yacht-Master 42",
       "nickname": "",
@@ -864,7 +864,47 @@
         "assets/images/office/rolex-yacht-master-42-kcwt-1006/193.jpg",
         "assets/images/office/rolex-yacht-master-42-kcwt-1006/194.jpg"
       ],
-      "updated": "2026-10-20"
+      "updated": "2026-10-23"
+    },
+    {
+      "slug": "tudor-black-bay-chrono-kcwt-1009",
+      "status": "Available",
+      "brand": "Tudor",
+      "model": "Black Bay Chrono",
+      "nickname": "",
+      "reference": "79360N",
+      "stockId": "KCWT-1009",
+      "year": "2026",
+      "cardDate": "",
+      "condition": "Unworn",
+      "set": "Complete Set",
+      "price": 5800,
+      "caseSize": "41mm",
+      "material": "Stainless steel",
+      "dial": "",
+      "bracelet": "",
+      "included": "Watch with original box and papers",
+      "description": "Tudor Black Bay Chrono ref. 79360N. Year 2026, unworn condition. 41mm Stainless steel case. Included: Watch with original box and papers. Contact us for full details.",
+      "image": "assets/images/office/tudor-black-bay-chrono-kcwt-1009/199.jpg",
+      "cardImage": "assets/images/office/tudor-black-bay-chrono-kcwt-1009/199_card.jpg",
+      "order": -7,
+      "descAuto": true,
+      "source": "office",
+      "gallery": [
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/199.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/200.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/197.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/201.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/202.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/203.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/204.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/205.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/208.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/206.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/207.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1009/209.jpg"
+      ],
+      "updated": "2026-10-23"
     }
   ],
   "reviews": [
