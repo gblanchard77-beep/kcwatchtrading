@@ -1,68 +1,68 @@
 {
-  "updated": "2026-10-27T11:33:34.577Z",
+  "updated": "2026-10-27T17:25:40.416Z",
   "posts": [
     {
       "image": "assets/images/ig/live1.jpg",
+      "permalink": "https://www.instagram.com/p/DfASjxIDM_q/",
+      "alt": "Don't let it live in the box.",
+      "timestamp": "2026-10-27T16:30:06+0000",
+      "media_type": "image"
+    },
+    {
+      "image": "assets/images/ig/live2.jpg",
       "permalink": "https://www.instagram.com/p/De6tgdgjP-V/",
       "alt": "Same Panda, softer bracelet. Pick your 79360N.",
       "timestamp": "2026-10-25T12:30:08+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live2.jpg",
+      "image": "assets/images/ig/live3.jpg",
       "permalink": "https://www.instagram.com/p/De4ItbOGf2b/",
       "alt": "INCOMING.",
       "timestamp": "2026-10-24T12:30:07+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live3.jpg",
+      "image": "assets/images/ig/live4.jpg",
       "permalink": "https://www.instagram.com/p/De1_YkaD2hj/",
       "alt": "Trade up, not just sell.",
       "timestamp": "2026-10-23T16:30:07+0000",
       "media_type": "carousel"
     },
     {
-      "image": "assets/images/ig/live4.jpg",
+      "image": "assets/images/ig/live5.jpg",
       "permalink": "https://www.instagram.com/p/De1j6hEjbOD/",
       "alt": "INCOMING.",
       "timestamp": "2026-10-23T12:30:06+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live5.jpg",
+      "image": "assets/images/ig/live6.jpg",
       "permalink": "https://www.instagram.com/p/DezalTUHCLT/",
       "alt": "Selling your watch? Start with the reference number.",
       "timestamp": "2026-10-22T16:30:05+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live6.jpg",
+      "image": "assets/images/ig/live7.jpg",
       "permalink": "https://www.instagram.com/p/Dew1y0cGEjK/",
       "alt": "'Oyster' on the dial isn't a condition report.",
       "timestamp": "2026-10-21T16:30:07+0000",
       "media_type": "carousel"
     },
     {
-      "image": "assets/images/ig/live7.jpg",
+      "image": "assets/images/ig/live8.jpg",
       "permalink": "https://www.instagram.com/p/DewaUv8iDWO/",
       "alt": "SOLD.",
       "timestamp": "2026-10-21T12:30:07+0000",
       "media_type": "image"
     },
     {
-      "image": "assets/images/ig/live8.jpg",
+      "image": "assets/images/ig/live9.jpg",
       "permalink": "https://www.instagram.com/p/DeuRAApjy5J/",
       "alt": "Buying a Rolex or Tudor from us? Here's what happens, start to finish.",
       "timestamp": "2026-10-20T16:30:08+0000",
       "media_type": "carousel"
-    },
-    {
-      "image": "assets/images/ig/live9.jpg",
-      "permalink": "https://www.instagram.com/p/Det1hvljf5_/",
-      "alt": "SOLD.",
-      "timestamp": "2026-10-20T12:30:05+0000",
-      "media_type": "image"
     }
   ]
 }
