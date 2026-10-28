@@ -3,7 +3,7 @@
   "watches": [
     {
       "slug": "tudor-black-bay-68-kc10182",
-      "status": "Reserved",
+      "status": "Sold",
       "brand": "Tudor",
       "model": "Black Bay 68",
       "nickname": "",
@@ -37,7 +37,7 @@
         "assets/images/office/tudor-black-bay-68-kc10182/98.jpg",
         "assets/images/office/tudor-black-bay-68-kc10182/109.jpg"
       ],
-      "updated": "2026-10-22"
+      "updated": "2026-10-28"
     },
     {
       "slug": "rolex-gmt-master-ii-kc10184",
@@ -905,6 +905,32 @@
         "assets/images/office/tudor-black-bay-chrono-kcwt-1009/209.jpg"
       ],
       "updated": "2026-10-23"
+    },
+    {
+      "slug": "tudor-black-bay-58-gmt-kcwt-1010",
+      "status": "Reserved",
+      "brand": "Tudor",
+      "model": "Black Bay 58 GMT",
+      "nickname": "",
+      "reference": "M7939G1A0NRU-003",
+      "stockId": "KCWT-1010",
+      "year": "2026",
+      "cardDate": "",
+      "condition": "Unworn",
+      "set": "Complete Set",
+      "price": 5050,
+      "caseSize": "",
+      "material": "",
+      "dial": "",
+      "bracelet": "",
+      "included": "Watch with original box and papers",
+      "description": "Tudor Black Bay 58 GMT ref. M7939G1A0NRU-003. Year 2026, unworn condition. Included: Watch with original box and papers. Contact us for full details.",
+      "image": "",
+      "cardImage": "",
+      "order": -8,
+      "descAuto": true,
+      "source": "office",
+      "updated": "2026-10-28"
     }
   ],
   "reviews": [
