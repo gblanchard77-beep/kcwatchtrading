@@ -212,12 +212,12 @@ def main():
         log('Feed problem, nothing changed:', type(ex).__name__, str(ex)[:200]); return 2
 
     raw = open(INV, encoding='utf-8').read(); inv = json.loads(raw); watches = inv['watches']
-    live_on_site = [e for e in watches if e.get('status') != 'Sold']
+    live_on_site = [e for e in watches if e.get('status') not in ('Sold', 'Hidden')]
     if SOLD_IDS: log('Sold overrides:', ', '.join(sorted(SOLD_IDS)))
     if not office and live_on_site:
         log('Safety stop: Office returned 0 watches while the site shows', len(live_on_site), '- is the Office Website channel switched off? Nothing changed.'); return 3
 
-    report = {'new': [], 'updated': [], 'sold': [], 'photos_new': [], 'photos_removed': [], 'warnings': []}
+    report = {'new': [], 'updated': [], 'sold': [], 'hidden': [], 'photos_new': [], 'photos_removed': [], 'warnings': []}
     claimed = set(); now = today()
     for w in office:
         i, how = match(watches, w, claimed)
@@ -252,6 +252,12 @@ def main():
 
     gone = [i for i, e in enumerate(watches) if i not in claimed and e.get('status') != 'Sold']
     office_gone = [i for i in gone if watches[i].get('source') == 'office']
+    held = {str(x).strip().upper() for x in (feed.get('held') or []) if str(x).strip()}      # watches the Office left out of the feed only because they have no picture yet
+    hold_gone = [i for i in office_gone if (watches[i].get('stockId') or '').strip().upper() in held]
+    office_gone = [i for i in office_gone if i not in hold_gone]      # not sold: hidden until they have a picture
+    for i in hold_gone:
+        e = watches[i]
+        if e.get('status') != 'Hidden': e['status'] = 'Hidden'; e['updated'] = now; report['hidden'].append(f'{e.get("stockId")} {e["brand"]} {e["model"]} {e["reference"]} -> Hidden (no picture in Office yet)')
     for i in gone:
         if i not in office_gone: report['warnings'].append(f'{watches[i].get("stockId") or watches[i]["slug"]}: on the site but not in Office and never synced; left unchanged')
     if len(office_gone) > MAX_SOLD_PER_RUN and not a.allow_mass_sold:
@@ -264,7 +270,7 @@ def main():
 
     out = json.dumps(inv, indent=2, ensure_ascii=False)
     changed = out != raw
-    for k in ('new', 'updated', 'sold', 'photos_new', 'photos_removed', 'warnings'):
+    for k in ('new', 'updated', 'sold', 'hidden', 'photos_new', 'photos_removed', 'warnings'):
         for line in report[k]: log(f'[{k}]', line)
     if not changed:
         log('No change.'); return 0
@@ -275,6 +281,7 @@ def main():
     parts = []
     if report['new']: parts.append(f'{len(report["new"])} new')
     if report['sold']: parts.append(f'{len(report["sold"])} sold')
+    if report['hidden']: parts.append(f'{len(report["hidden"])} hidden')
     if report['updated']: parts.append(f'{len(report["updated"])} updated')
     msg = 'Office sync: ' + (', '.join(parts) or 'inventory updated') + '\n\n' + '\n'.join(report['new'] + report['sold'] + report['updated'])
     if a.msg_file: open(a.msg_file, 'w', encoding='utf-8').write(msg + '\n')
