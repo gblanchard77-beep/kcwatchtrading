@@ -23,7 +23,7 @@
 var KCWT = { data: null };
 function loadInventory(){
   if(KCWT._p) return KCWT._p;
-  KCWT._p = fetch('assets/data/inventory.json').then(function(r){return r.json()}).then(function(d){KCWT.data=d;return d});
+  KCWT._p = fetch('assets/data/inventory.json').then(function(r){return r.json()}).then(function(d){d.watches=(d.watches||[]).filter(function(w){return w.status!=='Hidden'});KCWT.data=d;return d});
   return KCWT._p;
 }
 function fmtPrice(p){ if(p===undefined||p===null||p==='')return 'Inquire'; return typeof p==='number' ? '$'+p.toLocaleString('en-US') : p; }
