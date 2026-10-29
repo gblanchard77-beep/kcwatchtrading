@@ -17,6 +17,7 @@ E = lambda s: html.escape(str(s if s is not None else ''), quote=True)
 
 def load():
     inv = json.load(open(os.path.join(ROOT, 'assets/data/inventory.json'), encoding='utf-8'))
+    inv['watches'] = [w for w in inv.get('watches', []) if w.get('status') != 'Hidden']      # a watch with no picture in the Office is hidden: no page, no sitemap entry
     tpl = open(os.path.join(ROOT, 'watch.html'), encoding='utf-8').read()
     return inv, tpl
 
