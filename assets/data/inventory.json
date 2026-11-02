@@ -1014,7 +1014,7 @@
     },
     {
       "slug": "zztest-sold-watch-kcwt-1011",
-      "status": "Reserved",
+      "status": "Sold",
       "brand": "ZZTEST",
       "model": "Sold Watch",
       "nickname": "",
@@ -1040,7 +1040,7 @@
     },
     {
       "slug": "zztest-traded-watch-kcwt-1012",
-      "status": "Available",
+      "status": "Sold",
       "brand": "ZZTEST",
       "model": "Traded Watch",
       "nickname": "",
