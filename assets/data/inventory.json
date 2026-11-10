@@ -1071,12 +1071,15 @@
       "bracelet": "",
       "included": "Watch with original box and papers",
       "description": "Rolex GMT MASTER ii ref.. Year 2026, unworn condition. Included: Watch with original box and papers. Contact us for full details.",
-      "image": "",
-      "cardImage": "",
+      "image": "assets/images/office/rolex-gmt-master-ii-kcwt-1014/261.jpg",
+      "cardImage": "assets/images/office/rolex-gmt-master-ii-kcwt-1014/261_card.jpg",
       "order": -12,
       "descAuto": true,
       "source": "office",
-      "updated": "2026-11-10"
+      "updated": "2026-11-10",
+      "gallery": [
+        "assets/images/office/rolex-gmt-master-ii-kcwt-1014/261.jpg"
+      ]
     }
   ],
   "reviews": [
