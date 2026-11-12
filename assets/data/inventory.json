@@ -1127,12 +1127,24 @@
       "bracelet": "5-Link",
       "included": "Watch with original box and papers",
       "description": "Tudor Black Bay Chrono ref. 79360N. Year 2026, unworn condition. White dial, 41mm Steel case, 5-Link bracelet. Included: Watch with original box and papers. Contact us for full details.",
-      "image": "",
-      "cardImage": "",
+      "image": "assets/images/office/tudor-black-bay-chrono-kcwt-1018/269.jpg",
+      "cardImage": "assets/images/office/tudor-black-bay-chrono-kcwt-1018/269_card.jpg",
       "order": -14,
       "descAuto": true,
       "source": "office",
-      "updated": "2026-11-12"
+      "updated": "2026-11-12",
+      "gallery": [
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/269.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/268.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/270.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/271.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/272.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/273.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/274.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/275.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/276.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/277.jpg"
+      ]
     }
   ],
   "reviews": [
