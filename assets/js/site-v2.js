@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 /* ---- forms: deliver via Railway relay -> Telegram ---- */
+window.__kcwtT0=Date.now();
 /* ---- lead endpoint discovery ---- */
 var LEAD_EP = null;
 var LEAD_EP_P = fetch('lead-endpoint.txt').then(function(r){return r.ok?r.text():''}).then(function(t){
@@ -152,6 +153,8 @@ async function submitLeadForm(o){
     return}
   btn.textContent='Sending...';btn.disabled=true;msg.style.display='none';
   var payload={name:name,contact:contact,watch:o.watchInfo||'',intent:o.intent||'General inquiry',message:o.message||'',page:location.pathname+location.search};
+  payload.hp=hp?hp.value:'';
+  payload.fill_ms=(window.__kcwtT0?Date.now()-window.__kcwtT0:null);
   var smsCb=document.getElementById('smsConsent');
   if(smsCb){
     payload.sms_consent=!!smsCb.checked;

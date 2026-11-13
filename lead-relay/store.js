@@ -26,13 +26,15 @@ CREATE INDEX IF NOT EXISTS website_leads_received_at_idx ON website_leads (recei
 ALTER TABLE website_leads ADD COLUMN IF NOT EXISTS sms_consent BOOLEAN;
 ALTER TABLE website_leads ADD COLUMN IF NOT EXISTS sms_consent_text TEXT;
 ALTER TABLE website_leads ADD COLUMN IF NOT EXISTS sms_consent_at TIMESTAMPTZ;
+ALTER TABLE website_leads ADD COLUMN IF NOT EXISTS spam_flag BOOLEAN;
+ALTER TABLE website_leads ADD COLUMN IF NOT EXISTS spam_reasons TEXT;
 `;
 
 const INSERT_SQL = `
 INSERT INTO website_leads
   (lead_uid, received_at, source, name, contact, contact_email, contact_phone,
-   watch, intent, message, page, sms_consent, sms_consent_text, sms_consent_at)
-VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+   watch, intent, message, page, sms_consent, sms_consent_text, sms_consent_at, spam_flag, spam_reasons)
+VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)
 ON CONFLICT (lead_uid) DO NOTHING`;
 
 const TG_SQL = `UPDATE website_leads SET tg_ok = $2 WHERE lead_uid = $1`;
@@ -53,6 +55,8 @@ function insertParams(lead) {
     typeof lead.sms_consent === 'boolean' ? lead.sms_consent : null,
     lead.sms_consent_text || null,
     lead.sms_consent_at || null,
+    typeof lead.spam_flag === 'boolean' ? lead.spam_flag : null,
+    lead.spam_reasons || null,
   ];
 }
 

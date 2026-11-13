@@ -40,7 +40,39 @@ function makePool() {
 let windowStart = Date.now(), count = 0;
 function limited() {
   if (Date.now() - windowStart > 600000) { windowStart = Date.now(); count = 0; }
-  return ++count > 30;
+  return ++count > 120; // global ceiling
+}
+/* per-IP limits: 6 leads / 10 min; 10 admin auth failures / 10 min */
+const ipHits = new Map(), authFails = new Map();
+function ipOf(req) {
+  const xf = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  return xf || req.socket.remoteAddress || '?';
+}
+function ipLimited(map, ip, max) {
+  const now = Date.now();
+  let e = map.get(ip);
+  if (!e || now - e.t > 600000) { e = { t: now, n: 0 }; map.set(ip, e); }
+  if (map.size > 5000) { for (const [k, x] of map) if (now - x.t > 600000) map.delete(k); }
+  return ++e.n > max;
+}
+/* constant-time key check */
+function keyOk(given) {
+  if (!ADMIN_KEY || !given) return false;
+  const a = Buffer.from(String(given)), b = Buffer.from(ADMIN_KEY);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+/* ---- spam scoring: tag, never block (except honeypot) ---- */
+function spamScore(d) {
+  const reasons = [];
+  const msg = String(d.message || '');
+  const links = (msg.match(/https?:\/\//gi) || []).length;
+  if (links >= 2) reasons.push(links + ' links in message');
+  else if (links === 1 && msg.length < 120) reasons.push('short message with link');
+  if (/\b(seo|backlinks?|guest post|web design|rank(ing)? on google|crypto|bitcoin|loan|invest(ment)? opportunity|marketing services|lead generation)\b/i.test(msg)) reasons.push('spam keywords');
+  if (typeof d.fill_ms === 'number' && d.fill_ms >= 0 && d.fill_ms < 3000) reasons.push('form filled in ' + (d.fill_ms/1000).toFixed(1) + 's');
+  if (validEmail(d.contact) && /@(qq\.com|mail\.ru|163\.com)$/i.test(String(d.contact).trim())) reasons.push('unusual email domain');
+  if (msg.length > 1500) reasons.push('very long message');
+  return reasons;
 }
 const esc = s => String(s || '').slice(0, 300);
 const dash = s => (s && String(s).trim()) ? esc(s) : '\u2014';
@@ -84,6 +116,7 @@ async function telegram(d, saved) {
     '',
     'Page: ' + dash(d.page),
     'SMS consent: ' + (d.sms_consent === true ? '\u2705 YES' : '\u2014'),
+    d.spam_flag ? '\u26A0\uFE0F Suspicious: ' + d.spam_reasons : null,
     savedLine(saved),
   ].filter(Boolean).join('\n');
   const r = await fetch(`https://api.telegram.org/bot${BOT}/sendMessage`, {
@@ -115,7 +148,7 @@ const f=all.filter(l=>!q||String(l.name||'').toLowerCase().includes(q));
 document.getElementById('count').textContent=f.length+' of '+all.length+' leads';
 document.getElementById('rows').innerHTML=f.map(l=>{
 const c=String(l.contact||'');const link=c.includes('@')?'<a href="mailto:'+esc(c)+'">'+esc(c)+'</a>':'<a href="tel:'+esc(c.replace(/[^\\d+]/g,''))+'">'+esc(c)+'</a>';
-const flags=[l.tg===false?'TG alert failed':null].filter(Boolean).join(', ');
+const flags=[l.spam_flag?('\\u26A0 '+(l.spam_reasons||'suspicious')):null,l.tg===false?'TG alert failed':null].filter(Boolean).join(', ');
 return '<tr><td>'+new Date(l.ts).toLocaleString('en-US',{timeZone:'America/Chicago'})+'</td><td>'+esc(l.name)+'</td><td>'+link+'</td><td>'+(esc(l.watch)||'\\u2014')+'</td><td>'+(esc(l.intent)||'\\u2014')+'</td><td>'+(esc(l.message)||'\\u2014')+'</td><td>'+esc(l.page)+'</td><td>'+(l.sms_consent===true?'\\u2705':'\\u2014')+'</td><td class="flag">'+flags+'</td></tr>';}).join('');}
 fetch('/admin/leads?key='+encodeURIComponent(key)).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{all=d.leads;
 if(!d.persistent)document.getElementById('warn').innerHTML='<div class="warn">\\u26A0 Storage volume not attached \\u2014 leads shown here will NOT survive a redeploy. Attach the Railway volume.</div>';
@@ -128,6 +161,9 @@ function buildServer({ store, sendTelegram = telegram }) {
 return http.createServer((req, res) => {
   const u = new URL(req.url, 'http://x');
   const origin = req.headers.origin || '';
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'no-referrer');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204, { 'Access-Control-Allow-Origin': ALLOWED.includes(origin) ? origin : ALLOWED[0],
@@ -135,24 +171,27 @@ return http.createServer((req, res) => {
     return res.end();
   }
   if (req.method === 'GET' && u.pathname === '/admin') {
-    if (!ADMIN_KEY || u.searchParams.get('key') !== ADMIN_KEY) { res.writeHead(401); return res.end('unauthorized'); }
+    if (ipLimited(authFails, ipOf(req), 10) && !keyOk(u.searchParams.get('key'))) { res.writeHead(429); return res.end('locked'); }
+    if (!keyOk(u.searchParams.get('key'))) { res.writeHead(401); return res.end('unauthorized'); }
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
     return res.end(ADMIN_HTML);
   }
   if (req.method === 'GET' && u.pathname === '/admin/leads') {
-    if (!ADMIN_KEY || u.searchParams.get('key') !== ADMIN_KEY) { res.writeHead(401); return res.end('{}'); }
+    if (ipLimited(authFails, ipOf(req), 10) && !keyOk(u.searchParams.get('key'))) { res.writeHead(429); return res.end('{}'); }
+    if (!keyOk(u.searchParams.get('key'))) { res.writeHead(401); return res.end('{}'); }
     res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
     return res.end(JSON.stringify({ persistent: PERSISTENT, leads: readLeads() }));
   }
   if (req.method === 'POST' && u.pathname === '/lead') {
     res.setHeader('Access-Control-Allow-Origin', ALLOWED.includes(origin) ? origin : ALLOWED[0]);
     if (!ALLOWED.includes(origin)) { res.writeHead(403); return res.end('forbidden'); }
-    if (limited()) { res.writeHead(429); return res.end('slow down'); }
+    if (limited() || ipLimited(ipHits, ipOf(req), 6)) { res.writeHead(429); return res.end('slow down'); }
     let body = '';
     req.on('data', c => { body += c; if (body.length > 6000) req.destroy(); });
     req.on('end', async () => {
       try {
         const d = JSON.parse(body || '{}');
+        if (d.hp) { res.writeHead(200, { 'Content-Type': 'application/json' }); return res.end(JSON.stringify({ ok: true })); } // honeypot: swallow silently
         if (!esc(d.name).trim() || !validContact(d.contact)) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
           return res.end(JSON.stringify({ ok: false, error: 'invalid_contact' }));
@@ -166,6 +205,9 @@ return http.createServer((req, res) => {
           sms_consent: typeof d.sms_consent === 'boolean' ? d.sms_consent : null,
           sms_consent_text: typeof d.sms_consent === 'boolean' ? String(d.sms_consent_text || '').slice(0, 800) || null : null,
           sms_consent_at: d.sms_consent === true ? (typeof d.sms_consent_at === 'string' && d.sms_consent_at.length <= 40 ? d.sms_consent_at : new Date().toISOString()) : null };
+        const spamReasons = spamScore(d);
+        lead.spam_flag = spamReasons.length > 0;
+        lead.spam_reasons = spamReasons.length ? spamReasons.join('; ').slice(0, 300) : null;
         try { storeLead(lead); } catch (e) { console.error('journal:', e.message); } // local journal for /admin
         const saved = await store.save(lead); // Postgres first; queued on disk if the DB fails
         let tgOk = null;
