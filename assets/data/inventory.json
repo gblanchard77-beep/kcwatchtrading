@@ -1132,12 +1132,11 @@
       "order": -14,
       "descAuto": true,
       "source": "office",
-      "updated": "2026-11-12",
+      "updated": "2026-11-17",
       "gallery": [
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/269.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/279.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/280.jpg",
-        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/282.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/272.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/273.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/270.jpg",
@@ -1145,7 +1144,8 @@
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/274.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/275.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/276.jpg",
-        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/277.jpg"
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/277.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1018/282.jpg"
       ]
     },
     {
@@ -1175,18 +1175,18 @@
       "gallery": [
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/287.jpg",
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/298.jpg",
-        "assets/images/office/tudor-pelagos-ultra-kcwt-1016/296.jpg",
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/299.jpg",
-        "assets/images/office/tudor-pelagos-ultra-kcwt-1016/288.jpg",
-        "assets/images/office/tudor-pelagos-ultra-kcwt-1016/289.jpg",
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/290.jpg",
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/291.jpg",
+        "assets/images/office/tudor-pelagos-ultra-kcwt-1016/288.jpg",
+        "assets/images/office/tudor-pelagos-ultra-kcwt-1016/289.jpg",
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/292.jpg",
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/293.jpg",
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/294.jpg",
-        "assets/images/office/tudor-pelagos-ultra-kcwt-1016/295.jpg"
+        "assets/images/office/tudor-pelagos-ultra-kcwt-1016/295.jpg",
+        "assets/images/office/tudor-pelagos-ultra-kcwt-1016/296.jpg"
       ],
-      "updated": "2026-11-16"
+      "updated": "2026-11-17"
     },
     {
       "slug": "tudor-black-bay-chrono-kcwt-1017",
@@ -1216,7 +1216,6 @@
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/304.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/300.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/301.jpg",
-        "assets/images/office/tudor-black-bay-chrono-kcwt-1017/303.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/305.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/306.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/307.jpg",
@@ -1224,9 +1223,10 @@
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/309.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/310.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1017/311.jpg",
-        "assets/images/office/tudor-black-bay-chrono-kcwt-1017/312.jpg"
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1017/312.jpg",
+        "assets/images/office/tudor-black-bay-chrono-kcwt-1017/303.jpg"
       ],
-      "updated": "2026-11-16"
+      "updated": "2026-11-17"
     }
   ],
   "reviews": [
