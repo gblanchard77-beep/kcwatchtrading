@@ -1287,12 +1287,15 @@
       "bracelet": "Oyster",
       "included": "Watch with original box and papers",
       "description": "Rolex GMT-Master II ref. 126710GRNR. Year 2026, unworn condition. Black dial, 40mm Oystersteel case, Oyster bracelet. Included: Watch with original box and papers. Contact us for full details.",
-      "image": "",
-      "cardImage": "",
+      "image": "assets/images/office/rolex-gmt-master-ii-kcwt-1020/329.jpg",
+      "cardImage": "assets/images/office/rolex-gmt-master-ii-kcwt-1020/329_card.jpg",
       "order": -18,
       "descAuto": true,
       "source": "office",
-      "updated": "2026-11-23"
+      "updated": "2026-11-23",
+      "gallery": [
+        "assets/images/office/rolex-gmt-master-ii-kcwt-1020/329.jpg"
+      ]
     }
   ],
   "reviews": [
