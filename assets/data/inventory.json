@@ -1110,7 +1110,7 @@
     },
     {
       "slug": "tudor-black-bay-chrono-kcwt-1018",
-      "status": "Available",
+      "status": "Reserved",
       "brand": "Tudor",
       "model": "Black Bay Chrono",
       "nickname": "",
@@ -1132,7 +1132,7 @@
       "order": -14,
       "descAuto": true,
       "source": "office",
-      "updated": "2026-11-17",
+      "updated": "2026-11-23",
       "gallery": [
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/269.jpg",
         "assets/images/office/tudor-black-bay-chrono-kcwt-1018/279.jpg",
@@ -1150,7 +1150,7 @@
     },
     {
       "slug": "tudor-pelagos-ultra-kcwt-1016",
-      "status": "Available",
+      "status": "Reserved",
       "brand": "Tudor",
       "model": "Pelagos Ultra",
       "nickname": "",
@@ -1186,7 +1186,7 @@
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/295.jpg",
         "assets/images/office/tudor-pelagos-ultra-kcwt-1016/296.jpg"
       ],
-      "updated": "2026-11-17"
+      "updated": "2026-11-23"
     },
     {
       "slug": "tudor-black-bay-chrono-kcwt-1017",
