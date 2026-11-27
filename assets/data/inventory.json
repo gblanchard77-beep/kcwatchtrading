@@ -1307,6 +1307,35 @@
         "assets/images/office/rolex-gmt-master-ii-kcwt-1020/332.jpg",
         "assets/images/office/rolex-gmt-master-ii-kcwt-1020/342.jpg"
       ]
+    },
+    {
+      "slug": "rolex-gmt-master-ii-kcwt-1021",
+      "status": "Available",
+      "brand": "Rolex",
+      "model": "GMT-Master II",
+      "nickname": "",
+      "reference": "126710GRNR",
+      "stockId": "KCWT-1021",
+      "year": "2026",
+      "cardDate": "",
+      "condition": "Unworn",
+      "set": "Complete Set",
+      "price": 20995,
+      "caseSize": "40mm",
+      "material": "Oystersteel",
+      "dial": "Black",
+      "bracelet": "Oyster",
+      "included": "Watch with original box and papers",
+      "description": "Rolex GMT-Master II ref. 126710GRNR. Year 2026, unworn condition. Black dial, 40mm Oystersteel case, Oyster bracelet. Included: Watch with original box and papers. Contact us for full details.",
+      "image": "assets/images/office/rolex-gmt-master-ii-kcwt-1021/330.jpg",
+      "cardImage": "assets/images/office/rolex-gmt-master-ii-kcwt-1021/330_card.jpg",
+      "order": -19,
+      "descAuto": true,
+      "source": "office",
+      "gallery": [
+        "assets/images/office/rolex-gmt-master-ii-kcwt-1021/330.jpg"
+      ],
+      "updated": "2026-11-27"
     }
   ],
   "reviews": [
